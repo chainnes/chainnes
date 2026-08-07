@@ -1,89 +1,208 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.17.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.17.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.17.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chainnes - Green Tech Innovations</title>
+    <style>
+        /* Green Tech Theme CSS */
+        :root {
+            --eco-green: #2ecc71;
+            --dark-slate: #1a1f24;
+            --light-gray: #f8f9fa;
+            --text-muted: #a0aec0;
         }
-      });
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--dark-slate);
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Top Navigation SPA */
+        nav {
+            background: rgba(17, 21, 24, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            border-bottom: 2px solid var(--eco-green);
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav a:hover, nav a.active {
+            color: #fff;
+            background: rgba(46, 204, 113, 0.2);
+        }
+
+        /* SPA Sections */
+        .spa-section {
+            display: none;
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .spa-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--eco-green);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #232931;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--eco-green);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPA Navigation -->
+    <nav>
+        <a onclick="navigate('home')" id="nav-home" class="active">Home</a>
+        <a onclick="navigate('about')" id="nav-about">About</a>
+        <a onclick="navigate('services')" id="nav-services">Services</a>
+        <a onclick="navigate('showcases')" id="nav-showcases">Showcases</a>
+        <a onclick="navigate('products')" id="nav-products">Products</a>
+        <a onclick="navigate('pricing')" id="nav-pricing">Pricing</a>
+        <a onclick="navigate('learn')" id="nav-learn">Learn</a>
+        <a onclick="navigate('docs')" id="nav-docs">Docs</a>
+        <a onclick="navigate('launch')" id="nav-launch">Launch</a>
+        <a onclick="navigate('lab')" id="nav-lab">Lab</a>
+    </nav>
+
+    <!-- Sections -->
+    <main>
+        <section id="home" class="spa-section active">
+            <h1>Welcome to Chainnes</h1>
+            <p>Pioneering sustainable technology solutions for a greener tomorrow.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Eco-Driven</h3>
+                    <p>Building apps that track and solve civic and environmental issues.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="spa-section">
+            <h2>About Us</h2>
+            <p>Learn about our mission to merge civic-tech with green innovation.</p>
+        </section>
+
+        <section id="services" class="spa-section">
+            <h2>Our Services</h2>
+            <p>We provide full-stack web solutions, automation, and data pipelines.</p>
+        </section>
+
+        <section id="showcases" class="spa-section">
+            <h2>Showcases</h2>
+            <p>Explore our recent successful community problem tracker implementations.</p>
+        </section>
+
+        <section id="products" class="spa-section">
+            <h2>Products</h2>
+            <p>Discover tools designed to make sustainable tech accessible.</p>
+        </section>
+
+        <section id="pricing" class="spa-section">
+            <h2>Pricing</h2>
+            <p>Transparent, affordable plans for communities and enterprises.</p>
+        </section>
+
+        <section id="learn" class="spa-section">
+            <h2>Learn</h2>
+            <p>Access our tutorials on setting up green-tech architectures.</p>
+        </section>
+
+        <section id="docs" class="spa-section">
+            <h2>Documentation</h2>
+            <p>Read the developer docs for our civic-tech APIs and integrations.</p>
+        </section>
+
+        <section id="launch" class="spa-section">
+            <h2>Launch Pad</h2>
+            <p>Ready to deploy your own instance? Start here.</p>
+        </section>
+
+        <section id="lab" class="spa-section">
+            <h2>The Lab</h2>
+            <p>Experimental AI models, problem-solver coordination systems, and data analytics.</p>
+        </section>
+    </main>
+
+    <!-- SPA Logic -->
+    <script>
+        function navigate(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.spa-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            // Remove active state from all links
+            document.querySelectorAll('nav a').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            // Highlight the selected nav link
+            document.getElementById('nav-' + sectionId).classList.add('active');
+            
+            // Update the URL without reloading the page
+            window.history.pushState(null, '', '#' + sectionId);
+        }
+
+        // Handle page load with a hash (e.g., chainnes.web.app/#lab)
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                navigate(hash);
+            }
+        });
     </script>
-  </body>
+</body>
 </html>
