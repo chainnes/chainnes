@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHAINNE API | Build on Top of the Platform</title>
+  <meta name="description" content="Reference for the CHAINNE API, webhook events, and integration patterns." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #07111f; color: #f3f4f6; }
+    .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+  </style>
+</head>
+<body class="bg-grid min-h-screen antialiased">
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="chainne.html" class="flex items-center gap-3">
+        <img src="assets/chainne-logo.svg" alt="CHAINNE logo" class="w-9 h-9" />
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+        <a href="blog.html" class="hover:text-cyan-400 transition-colors">Blog</a>
+        <a href="docs.html" class="hover:text-cyan-400 transition-colors">Docs</a>
+        <a href="chainne-api.html" class="text-white">API</a>
+        <a href="self-hosted.html" class="hover:text-cyan-400 transition-colors">Self-Hosted</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 py-20">
+    <div class="max-w-3xl mb-12">
+      <p class="text-sm font-mono uppercase tracking-[0.3em] text-cyan-400">CHAINNE API</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mt-3">A clean API for launching automations and retrieving results.</h1>
+      <p class="text-lg text-gray-400 mt-5">Use the API to trigger workflows, post structured inputs, and receive rich event responses from your deployed agents.</p>
+    </div>
+
+    <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+      <h2 class="text-2xl font-semibold text-white">Example request</h2>
+      <pre class="mt-5 overflow-x-auto rounded-xl bg-gray-900 p-4 text-sm text-cyan-300"><code>curl -X POST https://api.chainne.ai/v1/workflows/run \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"workflow":"lead-qualification","input":{"source":"webform"}}'</code></pre>
+      <p class="text-gray-400 mt-6">Supported actions include workflow execution, webhook dispatch, and audit log retrieval. Explore the docs for full payload examples and response models.</p>
+    </div>
+  </main>
+</body>
+</html>

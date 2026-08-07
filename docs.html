@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHAINNE Docs | Setup, Guides, and References</title>
+  <meta name="description" content="Documentation for CHAINNE products, APIs, deployments, and onboarding flows." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #07111f; color: #f3f4f6; }
+    .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+  </style>
+</head>
+<body class="bg-grid min-h-screen antialiased">
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="chainne.html" class="flex items-center gap-3">
+        <img src="assets/chainne-logo.svg" alt="CHAINNE logo" class="w-9 h-9" />
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+        <a href="blog.html" class="hover:text-cyan-400 transition-colors">Blog</a>
+        <a href="docs.html" class="text-white">Docs</a>
+        <a href="chainne-api.html" class="hover:text-cyan-400 transition-colors">API</a>
+        <a href="self-hosted.html" class="hover:text-cyan-400 transition-colors">Self-Hosted</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 py-20">
+    <div class="max-w-3xl mb-12">
+      <p class="text-sm font-mono uppercase tracking-[0.3em] text-cyan-400">DOCUMENTATION</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mt-3">Docs for building, deploying, and scaling agentic systems.</h1>
+      <p class="text-lg text-gray-400 mt-5">Each guide is designed to help you get from concept to production with less guesswork and better control.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+        <h2 class="text-2xl font-semibold text-white">Getting started</h2>
+        <p class="text-gray-400 mt-4">Create your workspace, connect your tools, and launch your first workflow in minutes.</p>
+        <ul class="text-sm text-gray-300 mt-5 space-y-2">
+          <li>• Connect email, CRM, and database sources</li>
+          <li>• Choose your first agent template</li>
+          <li>• Configure approval and fallback rules</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+        <h2 class="text-2xl font-semibold text-white">Deployment guide</h2>
+        <p class="text-gray-400 mt-4">Deploy production-ready automations with monitoring, retries, and secure secrets handling.</p>
+        <ul class="text-sm text-gray-300 mt-5 space-y-2">
+          <li>• Docker and self-hosted setup</li>
+          <li>• Webhook and scheduled trigger patterns</li>
+          <li>• Logging, auditing, and monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

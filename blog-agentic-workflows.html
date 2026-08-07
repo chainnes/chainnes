@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Designing Reliable Agentic Workflows | CHAINNE Blog</title>
+  <meta name="description" content="A guide to building resilient agentic workflows with guardrails, orchestration, and measurable outcomes." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #07111f; color: #f3f4f6; }
+    .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+  </style>
+</head>
+<body class="bg-grid min-h-screen antialiased">
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="chainne.html" class="flex items-center gap-3">
+        <img src="assets/chainne-logo.svg" alt="CHAINNE logo" class="w-9 h-9" />
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+        <a href="blog.html" class="text-white">Blog</a>
+        <a href="docs.html" class="hover:text-cyan-400 transition-colors">Docs</a>
+        <a href="chainne-api.html" class="hover:text-cyan-400 transition-colors">API</a>
+        <a href="self-hosted.html" class="hover:text-cyan-400 transition-colors">Self-Hosted</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-20">
+    <a href="blog.html" class="text-cyan-400 hover:text-cyan-300">← Back to blog</a>
+    <p class="text-sm font-mono uppercase tracking-[0.3em] text-cyan-400 mt-6">Strategy · 8 min read</p>
+    <h1 class="text-4xl md:text-5xl font-bold text-white mt-4">How to design agentic workflows that stay reliable under pressure</h1>
+    <p class="text-xl text-gray-400 mt-6">The biggest mistake teams make is treating an agent like a chatbot. The real value comes when you structure it like a system with inputs, guardrails, and handoffs.</p>
+
+    <div class="rounded-2xl border border-cyan-900/40 bg-cyan-950/20 p-6 mt-10">
+      <h2 class="text-xl font-semibold text-white">The 4-part blueprint</h2>
+      <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+        <li><strong class="text-white">Trigger and intake:</strong> capture the event, validate it, and route it to the correct agent.</li>
+        <li><strong class="text-white">Reasoning layer:</strong> define the task, available tools, and fallback behavior.</li>
+        <li><strong class="text-white">Action layer:</strong> connect APIs, databases, and internal systems with explicit permissions.</li>
+        <li><strong class="text-white">Review and observability:</strong> log every decision, surface failures quickly, and build approvals where needed.</li>
+      </ul>
+    </div>
+
+    <div class="prose prose-invert mt-10 text-gray-300 space-y-5">
+      <p>When you move from a single prompt to an orchestrated workflow, small changes matter. A good agent should know when to respond directly, when to ask for clarification, and when to stop and escalate.</p>
+      <p>That means you need clear prompts, deterministic fallback steps, and a visibility layer that lets you inspect what happened in real time. In practice, this often looks like an event trigger, a retrieval or tool step, a decision branch, and a structured output.</p>
+      <p>If you want this to be production-worthy, treat each agent as a service with scope, boundaries, and measurable outcomes rather than a clever prompt.</p>
+    </div>
+  </main>
+</body>
+</html>

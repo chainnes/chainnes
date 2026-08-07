@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHAINNE Self-Hosted | Own Your Automation Stack</title>
+  <meta name="description" content="Self-hosted deployment options for teams that want control, privacy, and long-term flexibility." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #07111f; color: #f3f4f6; }
+    .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+  </style>
+</head>
+<body class="bg-grid min-h-screen antialiased">
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="chainne.html" class="flex items-center gap-3">
+        <img src="assets/chainne-logo.svg" alt="CHAINNE logo" class="w-9 h-9" />
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+        <a href="blog.html" class="hover:text-cyan-400 transition-colors">Blog</a>
+        <a href="docs.html" class="hover:text-cyan-400 transition-colors">Docs</a>
+        <a href="chainne-api.html" class="hover:text-cyan-400 transition-colors">API</a>
+        <a href="self-hosted.html" class="text-white">Self-Hosted</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 py-20">
+    <div class="max-w-3xl mb-12">
+      <p class="text-sm font-mono uppercase tracking-[0.3em] text-cyan-400">SELF-HOSTED</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mt-3">Deploy CHAINNE in your own environment.</h1>
+      <p class="text-lg text-gray-400 mt-5">A self-hosted deployment gives your team stronger control over data, permissions, and workflows while keeping the same modern experience.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+        <h2 class="text-xl font-semibold text-white">Private hosting</h2>
+        <p class="text-gray-400 mt-3">Run the platform on your own infrastructure and keep sensitive workflows inside your environment.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+        <h2 class="text-xl font-semibold text-white">Custom integrations</h2>
+        <p class="text-gray-400 mt-3">Connect internal APIs, databases, and enterprise tools without forcing a vendor lock-in pattern.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8">
+        <h2 class="text-xl font-semibold text-white">Auditability</h2>
+        <p class="text-gray-400 mt-3">Keep logs, approvals, and execution history in a setup that fits your review process.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHAINNE Labs | Build Your Agent</title>
+  <meta name="description" content="Design, prompt, and deploy your own autonomous AI agents and workflow automations with CHAINNE Labs — your agentic co-pilot.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080b12; color: #f3f4f6; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #111827; }
+    ::-webkit-scrollbar-thumb { background: #1e3a4c; border-radius: 4px; }
+
+    .bg-grid {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+    }
+
+    /* Glow effects */
+    .glow-cyan { box-shadow: 0 0 40px -12px rgba(6,182,212,0.4); }
+    .glow-indigo { box-shadow: 0 0 40px -12px rgba(99,102,241,0.3); }
+
+    /* Animated nodes */
+    @keyframes pulse-ring {
+      0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); }
+      50%      { box-shadow: 0 0 0 8px rgba(6,182,212,0); }
+    }
+    .node-active { animation: pulse-ring 2s ease-in-out infinite; }
+
+    /* Chat message fade in */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-enter { animation: fadeSlideUp 0.35s ease forwards; }
+
+    /* Typing cursor */
+    @keyframes blink { 50% { opacity: 0; } }
+    .cursor { display: inline-block; width: 2px; height: 1em; background: #22d3ee; margin-left: 2px; vertical-align: middle; animation: blink 0.75s step-end infinite; }
+
+    /* Workflow node connector line */
+    .connector { position: absolute; top: 50%; left: 100%; width: 32px; height: 2px; background: linear-gradient(to right, #0e7490, #6366f1); }
+
+    /* Scrollable chat window */
+    #chatWindow { scroll-behavior: smooth; }
+
+    /* Tier badge colours */
+    .badge-free     { background: #111827; color: #9ca3af; border-color: #374151; }
+    .badge-starter  { background: rgba(6,182,212,0.12); color: #22d3ee; border-color: rgba(6,182,212,0.35); }
+    .badge-business { background: rgba(139,92,246,0.12); color: #a78bfa; border-color: rgba(139,92,246,0.35); }
+
+    /* Input glow on focus */
+    textarea:focus, input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(6,182,212,0.4);
+    }
+
+    /* Sidebar scrollable */
+    #sidePanel { overflow-y: auto; max-height: calc(100vh - 64px); }
+
+    /* Node graph */
+    .wf-node {
+      border: 1px solid #1f2937;
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 12px;
+      transition: border-color .25s;
+    }
+    .wf-node:hover { border-color: #0e7490; }
+    .wf-edge {
+      display: flex; align-items: center;
+      color: #374151;
+      font-size: 18px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="bg-grid min-h-screen flex flex-col antialiased">
+
+  <!-- Top Bar -->
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50 h-16 flex items-center px-6">
+    <div class="flex items-center gap-3 mr-8">
+      <a href="chainnes.html" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">C</div>
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <span class="text-gray-600 font-mono text-xs">/</span>
+      <span class="text-gray-400 font-mono text-xs tracking-widest uppercase">Labs</span>
+    </div>
+
+    <!-- Tier Selector -->
+    <div class="flex items-center gap-2 ml-auto mr-6">
+      <span class="text-xs text-gray-500 mr-1 font-mono">Tier:</span>
+      <button id="btnFree" onclick="setTier('free')" class="tier-btn px-3 py-1 text-xs font-bold rounded-full border badge-free">Free</button>
+      <button id="btnStarter" onclick="setTier('starter')" class="tier-btn px-3 py-1 text-xs font-bold rounded-full border badge-starter">Starter</button>
+      <button id="btnBusiness" onclick="setTier('business')" class="tier-btn px-3 py-1 text-xs font-bold rounded-full border badge-business opacity-50">Business</button>
+    </div>
+
+    <!-- Active Tier Indicator -->
+    <div id="tierBadge" class="flex items-center gap-2 border border-cyan-500/30 bg-cyan-500/5 rounded-full px-3 py-1.5 text-xs font-mono text-cyan-400">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span id="tierLabel">STARTER LAB</span>
+    </div>
+  </nav>
+
+  <!-- Main Layout: 3 columns -->
+  <div class="flex flex-1 overflow-hidden" style="height: calc(100vh - 64px);">
+
+    <!-- ─── LEFT SIDEBAR: History / Templates ─── -->
+    <aside id="sidePanel" class="hidden lg:flex flex-col w-64 border-r border-gray-800 bg-gray-950/50 p-4">
+      <div class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-4">Templates</div>
+      <div class="space-y-2">
+        <button onclick="loadTemplate('support')" class="w-full text-left px-3 py-2.5 rounded-lg border border-gray-800 bg-gray-900/40 hover:border-cyan-500/40 text-xs text-gray-300 hover:text-white transition-colors">
+          🤖 Customer Support Agent
+        </button>
+        <button onclick="loadTemplate('scraper')" class="w-full text-left px-3 py-2.5 rounded-lg border border-gray-800 bg-gray-900/40 hover:border-cyan-500/40 text-xs text-gray-300 hover:text-white transition-colors">
+          🌐 Vision Web Scraper
+        </button>
+        <button onclick="loadTemplate('sql')" class="w-full text-left px-3 py-2.5 rounded-lg border border-gray-800 bg-gray-900/40 hover:border-cyan-500/40 text-xs text-gray-300 hover:text-white transition-colors">
+          📊 Natural Language SQL
+        </button>
+        <button onclick="loadTemplate('siem')" class="w-full text-left px-3 py-2.5 rounded-lg border border-gray-800 bg-gray-900/40 hover:border-cyan-500/40 text-xs text-gray-300 hover:text-white transition-colors">
+          🛡️ SIEM Alert Enrichment
+        </button>
+        <button onclick="loadTemplate('onboarding')" class="w-full text-left px-3 py-2.5 rounded-lg border border-gray-800 bg-gray-900/40 hover:border-cyan-500/40 text-xs text-gray-300 hover:text-white transition-colors">
+          🚀 Employee Onboarding Flow
+        </button>
+      </div>
+
+      <div class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-8 mb-4">Recent Sessions</div>
+      <div class="space-y-2">
+        <div class="px-3 py-2 rounded-lg bg-gray-900/30 text-xs text-gray-500 italic">No sessions yet</div>
+      </div>
+
+      <!-- Upgrade nudge -->
+      <div class="mt-auto pt-4 border-t border-gray-800">
+        <div class="rounded-lg border border-purple-500/20 bg-purple-500/5 p-3">
+          <p class="text-xs text-purple-300 font-semibold mb-1">🚀 Upgrade to Business</p>
+          <p class="text-[11px] text-gray-500 mb-2">Get unlimited agents, webhooks & team collaboration.</p>
+          <a href="chainne.html#platform" class="block text-center text-[10px] font-bold text-purple-400 border border-purple-500/30 rounded-lg py-1.5 hover:bg-purple-500/10 transition-colors">View Plans</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── CENTER: Chat Interface ─── -->
+    <main class="flex-1 flex flex-col min-w-0">
+
+      <!-- Chat Window -->
+      <div id="chatWindow" class="flex-1 overflow-y-auto px-4 md:px-10 py-8 space-y-6">
+
+        <!-- Welcome Message (CHAINNE) -->
+        <div class="flex items-start gap-3 msg-enter">
+          <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow shadow-cyan-500/20">C</div>
+          <div class="max-w-2xl">
+            <p class="text-xs font-mono text-gray-500 mb-1">CHAINNE  •  just now</p>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-gray-300 leading-relaxed space-y-3">
+              <p>Hey there! 👋 I'm <span class="text-cyan-400 font-semibold">CHAINNE</span>, your agentic co-pilot.</p>
+              <p>Tell me what you want to build — a customer support agent, a data pipeline, a web scraper, a Slack bot — <strong class="text-white">anything</strong>. I'll design the architecture for you and show you a live workflow preview.</p>
+              <p class="text-xs text-gray-500">Try: <span class="italic text-cyan-400 cursor-pointer hover:underline" onclick="fillPrompt('Build me an agent that monitors my email, summarizes important messages, and sends a daily digest to Slack.')">Build me an agent that monitors my email, summarizes important messages, and sends a daily digest to Slack.</span></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Prompt Bar -->
+      <div class="border-t border-gray-800 bg-gray-950/80 backdrop-blur-md px-4 md:px-10 py-4">
+        <div id="tierLimitBanner" class="hidden mb-3 px-4 py-2.5 rounded-lg border border-yellow-500/30 bg-yellow-500/5 text-xs text-yellow-300 flex items-center justify-between">
+          <span>⚠️ You've used your <strong>Free</strong> prompt limit (3). <a href="chainne.html#platform" class="underline hover:text-yellow-100">Upgrade to continue.</a></span>
+          <button onclick="setTier('starter')" class="ml-4 text-xs bg-yellow-500 text-black px-3 py-1 rounded-full font-bold hover:bg-yellow-400 transition-colors">Upgrade Free</button>
+        </div>
+        <div class="flex items-end gap-3 bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 focus-within:border-cyan-500/60 transition-colors">
+          <textarea id="promptInput"
+            class="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-600 leading-relaxed max-h-40"
+            rows="2"
+            placeholder="Describe the agent or workflow you want to build..."
+            onkeydown="handleKey(event)"></textarea>
+          <button id="sendBtn" onclick="sendPrompt()"
+            class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="flex items-center justify-between mt-2.5 px-1">
+          <p class="text-[10px] text-gray-600 font-mono">Press <kbd class="bg-gray-800 text-gray-400 px-1 rounded text-[9px]">Ctrl+↵</kbd> to send</p>
+          <div id="promptCounter" class="text-[10px] font-mono text-gray-500">
+            <span id="usedCount">0</span> / <span id="limitCount">5</span> prompts used
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ─── RIGHT PANEL: Workflow Preview ─── -->
+    <aside class="hidden xl:flex flex-col w-80 border-l border-gray-800 bg-gray-950/50">
+      <div class="px-5 py-4 border-b border-gray-800 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Workflow Preview</p>
+          <p id="wfTitle" class="text-sm font-bold text-white mt-1">—</p>
+        </div>
+        <span id="wfStatus" class="text-[10px] font-mono text-gray-600 bg-gray-900 border border-gray-800 rounded px-2 py-0.5">IDLE</span>
+      </div>
+
+      <!-- Node Graph -->
+      <div id="wfNodes" class="flex-1 overflow-y-auto p-5 space-y-3">
+        <div class="flex flex-col items-center gap-1 opacity-40">
+          <div class="wf-node w-full text-gray-600 text-center italic">No workflow yet</div>
+          <p class="text-xs text-gray-700">Send a prompt to see your agent visualized here.</p>
+        </div>
+      </div>
+
+      <!-- Need More Help CTA -->
+      <div class="px-5 py-4 border-t border-gray-800 space-y-2">
+        <p class="text-[11px] text-gray-500">Still need custom work? Reach Charlene directly:</p>
+        <div class="flex gap-2">
+          <a href="https://wa.me/+1234567890" target="_blank"
+             class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 text-xs font-bold hover:bg-emerald-500/10 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="mailto:hello@chainne.ai"
+             class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-bold hover:bg-cyan-500/10 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /layout -->
+
+  <script>
+    // ─── State ───
+    const TIERS = {
+      free:     { label: 'FREE PILOT',   limit: 3 },
+      starter:  { label: 'STARTER LAB',  limit: 10 },
+      business: { label: 'BUSINESS',     limit: 9999 },
+    };
+    let currentTier = 'starter';
+    let promptsUsed = 0;
+
+    // ─── Templates ───
+    const TEMPLATES = {
+      support: 'Build me an autonomous customer support agent that reads incoming support tickets, checks order history via API, auto-resolves common issues, and escalates complex ones to my team on Slack.',
+      scraper: 'Create a vision-based web scraper that takes a URL, screenshots the page using Gemini multimodal, extracts structured product data from the layout, and saves it to a PostgreSQL table.',
+      sql: 'Build a natural language SQL agent that connects to my Redshift database, converts plain English questions into safe read-only SQL, executes them, and returns a QuickChart visualization.',
+      siem: 'Design an automated SIEM enrichment agent that listens for webhook security alerts, cross-references IPs against threat intelligence APIs, enriches the ticket, scores severity, and posts to a Slack channel.',
+      onboarding: 'Create an employee onboarding workflow: when a new hire is added to HR system, automatically create accounts in Slack, Notion, and GitHub, send them a welcome email, and schedule a calendar intro with their manager.',
+    };
+
+    // ─── Workflow Node Presets ───
+    const WF_GRAPHS = {
+      support: {
+        title: 'Customer Support Agent',
+        nodes: [
+          { label: 'Webhook Trigger', icon: '⚡', color: 'cyan' },
+          { label: 'Ticket Parser (LLM)', icon: '🧠', color: 'indigo' },
+          { label: 'Order API Lookup', icon: '🔌', color: 'blue' },
+          { label: 'Policy Router', icon: '🗂️', color: 'purple' },
+          { label: 'Auto-Resolve / Escalate', icon: '✅', color: 'emerald' },
+          { label: 'Slack Notification', icon: '💬', color: 'cyan' },
+        ]
+      },
+      scraper: {
+        title: 'Vision Web Scraper',
+        nodes: [
+          { label: 'URL Input', icon: '🌐', color: 'blue' },
+          { label: 'Screenshot Capture', icon: '📷', color: 'cyan' },
+          { label: 'Gemini Vision (OCR)', icon: '🧠', color: 'indigo' },
+          { label: 'JSON Schema Validator', icon: '✔️', color: 'purple' },
+          { label: 'PostgreSQL Writer', icon: '🗄️', color: 'emerald' },
+        ]
+      },
+      sql: {
+        title: 'NL SQL Visualizer',
+        nodes: [
+          { label: 'User Query Input', icon: '💬', color: 'cyan' },
+          { label: 'Text-to-SQL Agent', icon: '🧠', color: 'indigo' },
+          { label: 'Safety Validator', icon: '🛡️', color: 'yellow' },
+          { label: 'Redshift Executor', icon: '⚡', color: 'blue' },
+          { label: 'QuickChart Renderer', icon: '📊', color: 'emerald' },
+        ]
+      },
+      siem: {
+        title: 'SIEM Incident Enrichment',
+        nodes: [
+          { label: 'Alert Webhook', icon: '⚡', color: 'red' },
+          { label: 'Threat Intel Lookup', icon: '🔍', color: 'cyan' },
+          { label: 'LLM Reasoning Engine', icon: '🧠', color: 'indigo' },
+          { label: 'Severity Scorer', icon: '⚠️', color: 'yellow' },
+          { label: 'Ticket Enrichment', icon: '📋', color: 'blue' },
+          { label: 'Slack / Teams Alert', icon: '💬', color: 'emerald' },
+        ]
+      },
+      onboarding: {
+        title: 'Employee Onboarding Flow',
+        nodes: [
+          { label: 'HR System Trigger', icon: '👤', color: 'cyan' },
+          { label: 'Slack Account Setup', icon: '💬', color: 'blue' },
+          { label: 'Notion + GitHub Invite', icon: '📓', color: 'indigo' },
+          { label: 'Welcome Email Dispatch', icon: '📧', color: 'purple' },
+          { label: 'Calendar Scheduler', icon: '📅', color: 'emerald' },
+        ]
+      },
+    };
+
+    // ─── Simulated AI Responses ───
+    const AI_RESPONSES = {
+      support: `**Autonomous Customer Support Agent** — architecture ready! 🤖\n\nHere's how I've designed this:\n\n**01. Webhook Trigger** — Listens for new support tickets from your helpdesk (Zendesk, Freshdesk, or plain webhook).\n**02. Ticket Parser** — Gemini Flash parses the issue category, sentiment, and key entities.\n**03. Order API Lookup** — Fetches live order/account state from your Shopify or custom API.\n**04. Policy Router** — Checks resolution rules: refund threshold, item status, account age.\n**05. Auto-Resolve / Escalate** — Either resolves the ticket automatically, or enriches it and routes to your team.\n**06. Slack Notification** — Sends a summary with resolution action to your ops channel.\n\nThis maps to a 6-node n8n workflow. Want me to generate the actual JSON export?`,
+
+      scraper: `**Vision-Based Web Scraper** — pipeline designed! 🌐\n\nNo fragile CSS selectors. Here's the architecture:\n\n**01. URL Input** — Accepts a URL via API or form trigger.\n**02. Screenshot Capture** — Uses Playwright (via n8n Code node) to render the full page.\n**03. Gemini Vision OCR** — The screenshot is sent to Gemini multimodal to extract structured layout data.\n**04. JSON Schema Validator** — Validates the extracted JSON against a predefined schema to prevent bad data.\n**05. PostgreSQL Writer** — Upserts clean records into your database table.\n\nThis is a 5-node n8n workflow. I can also add a retry loop for failed extractions. Shall I?`,
+
+      sql: `**Natural Language SQL Visualizer** — ready to wire up! 📊\n\nHere's your conversational BI architecture:\n\n**01. User Query Input** — A simple web form or Slack slash command takes the plain-English question.\n**02. Text-to-SQL Agent** — Uses a prompt-engineered LLM to generate safe, read-only SQL tailored to your schema.\n**03. Safety Validator** — Checks for dangerous keywords (DROP, INSERT, UPDATE) and validates syntax before execution.\n**04. Redshift Executor** — Runs the query against your cloud warehouse.\n**05. QuickChart Renderer** — Formats results into a chart and returns a URL or embeds it directly.\n\nWant me to add caching for repeated queries to cut down on API costs?`,
+
+      siem: `**SIEM Alert Enrichment Agent** — threat pipeline designed! 🛡️\n\nYour security automation architecture:\n\n**01. Alert Webhook** — Ingests real-time alerts from your SIEM (Splunk, Elastic, or custom).\n**02. Threat Intel Lookup** — Cross-references source IPs and file hashes with VirusTotal, Shodan, or AbuseIPDB.\n**03. LLM Reasoning Engine** — Analyzes the enriched context and generates a human-readable assessment.\n**04. Severity Scorer** — Scores 0–10 based on threat intel confidence, asset criticality, and anomaly type.\n**05. Ticket Enrichment** — Updates the SIEM ticket with the AI assessment and recommended remediation.\n**06. Slack / Teams Alert** — Posts a formatted card to your SOC channel with one-click actions.\n\nShould I add a human-in-the-loop approval gate for Critical severity alerts?`,
+
+      onboarding: `**Employee Onboarding Workflow** — automated! 🚀\n\nHere's your zero-touch onboarding pipeline:\n\n**01. HR System Trigger** — Watches for new employee records in BambooHR, Workday, or your custom HR API.\n**02. Slack Account Setup** — Automatically provisions a Slack account and adds them to the right channels.\n**03. Notion + GitHub Invite** — Creates a Notion onboarding doc from a template and sends a GitHub org invite.\n**04. Welcome Email** — Sends a personalised welcome email via SendGrid with their first-day checklist.\n**05. Calendar Scheduler** — Books a 30-minute intro call with their manager using Calendly or Google Calendar API.\n\nThis covers zero manual steps from HR entry to Day 1. Want me to add a 7-day drip sequence too?`,
+    };
+
+    // ─── Tier management ───
+    function setTier(tier) {
+      currentTier = tier;
+      document.getElementById('tierLabel').textContent = TIERS[tier].label;
+      document.getElementById('limitCount').textContent = tier === 'business' ? '∞' : TIERS[tier].limit;
+      document.querySelectorAll('.tier-btn').forEach(b => b.classList.add('opacity-50'));
+      document.getElementById('btn' + tier.charAt(0).toUpperCase() + tier.slice(1)).classList.remove('opacity-50');
+      updatePromptCounter();
+    }
+
+    // ─── Prompt counter ───
+    function updatePromptCounter() {
+      const limit = TIERS[currentTier].limit;
+      document.getElementById('usedCount').textContent = promptsUsed;
+      document.getElementById('limitCount').textContent = currentTier === 'business' ? '∞' : limit;
+      if (promptsUsed >= limit && currentTier !== 'business') {
+        document.getElementById('tierLimitBanner').classList.remove('hidden');
+        document.getElementById('sendBtn').disabled = true;
+        document.getElementById('sendBtn').classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        document.getElementById('tierLimitBanner').classList.add('hidden');
+        document.getElementById('sendBtn').disabled = false;
+        document.getElementById('sendBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    // ─── Load template ───
+    function loadTemplate(key) {
+      const input = document.getElementById('promptInput');
+      input.value = TEMPLATES[key];
+      input.focus();
+    }
+
+    // ─── Fill prompt from chat suggestion ───
+    function fillPrompt(text) {
+      const input = document.getElementById('promptInput');
+      input.value = text;
+      input.focus();
+    }
+
+    // ─── Keyboard shortcut ───
+    function handleKey(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); sendPrompt(); }
+    }
+
+    // ─── Detect template from text ───
+    function detectTemplate(text) {
+      const t = text.toLowerCase();
+      if (t.includes('support') || t.includes('ticket') || t.includes('refund')) return 'support';
+      if (t.includes('scraper') || t.includes('screenshot') || t.includes('crawl') || t.includes('web')) return 'scraper';
+      if (t.includes('sql') || t.includes('database') || t.includes('query') || t.includes('redshift') || t.includes('bigquery')) return 'sql';
+      if (t.includes('siem') || t.includes('alert') || t.includes('security') || t.includes('threat') || t.includes('incident')) return 'siem';
+      if (t.includes('onboard') || t.includes('employee') || t.includes('hr') || t.includes('hire')) return 'onboarding';
+      return null;
+    }
+
+    // ─── Generic response for unknown prompts ───
+    function genericResponse(text) {
+      return `Got it! I'm analyzing your request: *"${text.substring(0,80)}${text.length > 80 ? '…' : ''}"*\n\n**Architecture Draft:**\n\n**01. Trigger Node** — Based on your description, I'll set up an event-based trigger (webhook, schedule, or API call).\n**02. Intelligence Layer** — A reasoning agent (Gemini / GPT-4o) will parse incoming data and determine the next action.\n**03. Logic Router** — Branching paths based on your defined business rules or conditions.\n**04. Action Executor** — API calls, database writes, or message dispatch happen here.\n**05. Output / Notification** — Results are delivered via your preferred channel (Slack, email, dashboard, or API response).\n\nThis is a **5-node workflow**. To get a fully production-ready, exported n8n blueprint for this exact spec, use the contact form below or reach me directly on WhatsApp!`;
+    }
+
+    // ─── Render workflow graph ───
+    function renderGraph(key) {
+      const graph = WF_GRAPHS[key];
+      if (!graph) return;
+      document.getElementById('wfTitle').textContent = graph.title;
+      document.getElementById('wfStatus').textContent = 'ACTIVE';
+      document.getElementById('wfStatus').className = 'text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 rounded px-2 py-0.5';
+      const colourMap = { cyan: '#22d3ee', indigo: '#818cf8', blue: '#60a5fa', purple: '#c084fc', emerald: '#34d399', red: '#f87171', yellow: '#facc15' };
+      const container = document.getElementById('wfNodes');
+      container.innerHTML = '';
+      graph.nodes.forEach((n, i) => {
+        const color = colourMap[n.color] || '#22d3ee';
+        const nodeEl = document.createElement('div');
+        nodeEl.className = 'wf-node flex items-center gap-3 msg-enter';
+        nodeEl.style.borderColor = color + '33';
+        nodeEl.style.animationDelay = (i * 0.08) + 's';
+        nodeEl.innerHTML = `
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center text-base flex-shrink-0" style="background:${color}15;">${n.icon}</div>
+          <div>
+            <div class="text-[10px] font-mono mb-0.5" style="color:${color}">NODE ${String(i+1).padStart(2,'0')}</div>
+            <div class="text-xs text-white font-semibold">${n.label}</div>
+          </div>
+        `;
+        container.appendChild(nodeEl);
+        if (i < graph.nodes.length - 1) {
+          const edge = document.createElement('div');
+          edge.className = 'wf-edge justify-center text-gray-700';
+          edge.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>`;
+          container.appendChild(edge);
+        }
+      });
+    }
+
+    // ─── Append chat message ───
+    function appendMsg(role, text, extra = '') {
+      const win = document.getElementById('chatWindow');
+      const wrapper = document.createElement('div');
+      wrapper.className = 'flex items-start gap-3 msg-enter';
+
+      if (role === 'user') {
+        wrapper.innerHTML = `
+          <div class="ml-auto max-w-xl">
+            <p class="text-xs font-mono text-gray-500 mb-1 text-right">You  •  just now</p>
+            <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl rounded-tr-sm px-5 py-4 text-sm text-gray-200 leading-relaxed">${escHtml(text)}</div>
+          </div>
+          <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 font-bold text-sm">U</div>
+        `;
+      } else {
+        const formatted = formatResponse(text);
+        wrapper.innerHTML = `
+          <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow shadow-cyan-500/20">C</div>
+          <div class="max-w-2xl">
+            <p class="text-xs font-mono text-gray-500 mb-1">CHAINNE  •  just now</p>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-gray-300 leading-relaxed space-y-2">${formatted}</div>
+            ${extra}
+          </div>
+        `;
+      }
+      win.appendChild(wrapper);
+      win.scrollTop = win.scrollHeight;
+      return wrapper;
+    }
+
+    // ─── Typing indicator ───
+    function showTyping() {
+      const win = document.getElementById('chatWindow');
+      const el = document.createElement('div');
+      el.id = 'typing-indicator';
+      el.className = 'flex items-start gap-3 msg-enter';
+      el.innerHTML = `
+        <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow shadow-cyan-500/20">C</div>
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style="animation-delay:0ms"></span>
+          <span class="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style="animation-delay:150ms"></span>
+          <span class="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style="animation-delay:300ms"></span>
+        </div>
+      `;
+      win.appendChild(el);
+      win.scrollTop = win.scrollHeight;
+    }
+    function removeTyping() {
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    // ─── Format markdown-like bold and numbered lists ───
+    function formatResponse(text) {
+      return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '</p><p class="mt-2">')
+        .replace(/\n/g, '<br>');
+    }
+
+    function escHtml(t) {
+      return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ─── Main send function ───
+    function sendPrompt() {
+      const input = document.getElementById('promptInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const limit = TIERS[currentTier].limit;
+      if (promptsUsed >= limit && currentTier !== 'business') { updatePromptCounter(); return; }
+
+      // Append user message
+      appendMsg('user', text);
+      input.value = '';
+      input.style.height = 'auto';
+      promptsUsed++;
+      updatePromptCounter();
+
+      // Detect template
+      const key = detectTemplate(text);
+      const responseText = key ? AI_RESPONSES[key] : genericResponse(text);
+
+      // Show typing, then respond
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const ctaExtra = `
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a href="https://wa.me/+1234567890" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 text-xs font-semibold hover:bg-emerald-500/15 transition-colors">💬 WhatsApp Charlene</a>
+            <a href="mailto:hello@chainne.ai" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-semibold hover:bg-cyan-500/15 transition-colors">📧 Email</a>
+            <a href="chainne.html#contact" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-700 bg-gray-900 text-gray-300 text-xs font-semibold hover:bg-gray-800 transition-colors">📋 Full Quote</a>
+          </div>
+        `;
+        appendMsg('chainne', responseText, ctaExtra);
+        if (key) renderGraph(key);
+      }, 1200 + Math.random() * 800);
+    }
+
+    // ─── Init ───
+    const urlTier = new URLSearchParams(window.location.search).get('tier');
+    setTier(['free','starter','business'].includes(urlTier) ? urlTier : 'starter');
+    document.getElementById('promptInput').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+    });
+  </script>
+
+</body>
+</html>

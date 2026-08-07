@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHAINNE Blog | Agentic AI Insights</title>
+  <meta name="description" content="Real writing for founders, operators, and teams building with agentic AI, automation, and self-hosted systems." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #07111f; color: #f3f4f6; }
+    .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+  </style>
+</head>
+<body class="bg-grid min-h-screen antialiased">
+  <nav class="border-b border-gray-800/80 bg-gray-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="chainne.html" class="flex items-center gap-3">
+        <img src="assets/chainne-logo.svg" alt="CHAINNE logo" class="w-9 h-9" />
+        <span class="font-extrabold text-lg tracking-wider text-white">CHAINNE<span class="text-cyan-400">.</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+        <a href="blog.html" class="text-white">Blog</a>
+        <a href="docs.html" class="hover:text-cyan-400 transition-colors">Docs</a>
+        <a href="chainne-api.html" class="hover:text-cyan-400 transition-colors">API</a>
+        <a href="self-hosted.html" class="hover:text-cyan-400 transition-colors">Self-Hosted</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="signin.html" class="hidden sm:inline-flex text-sm font-medium text-gray-400 hover:text-white transition-colors">Sign In</a>
+        <a href="payments.html" class="inline-flex items-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 py-20">
+    <div class="max-w-3xl mb-12">
+      <p class="text-sm font-mono uppercase tracking-[0.3em] text-cyan-400">CHAINNE BLOG</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mt-3">Practical articles for teams shipping agentic AI and automation.</h1>
+      <p class="text-lg text-gray-400 mt-5">These posts are written to help founders, operators, and builders choose the right workflow, deployment model, and operating rhythm before they scale.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <article class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8 shadow-lg shadow-cyan-950/20">
+        <p class="text-sm font-mono text-cyan-400">Strategy · 8 min read</p>
+        <h2 class="text-2xl font-semibold text-white mt-3">How to design agentic workflows that stay reliable under pressure</h2>
+        <p class="text-gray-400 mt-4">A practical playbook for moving from one-off prompts to durable systems with memory, fallbacks, and review loops.</p>
+        <a href="blog-agentic-workflows.html" class="mt-6 inline-flex items-center text-cyan-400 font-semibold hover:text-cyan-300">Read article →</a>
+      </article>
+
+      <article class="rounded-2xl border border-gray-800 bg-gray-950/60 p-8 shadow-lg shadow-cyan-950/20">
+        <p class="text-sm font-mono text-cyan-400">Infrastructure · 6 min read</p>
+        <h2 class="text-2xl font-semibold text-white mt-3">Why self-hosted automation wins for teams with compliance and control needs</h2>
+        <p class="text-gray-400 mt-4">A closer look at deployment choices for privacy-sensitive operations, internal copilots, and regulated teams.</p>
+        <a href="blog-self-hosted-automation.html" class="mt-6 inline-flex items-center text-cyan-400 font-semibold hover:text-cyan-300">Read article →</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-t border-gray-800/80 bg-gray-950/60">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-500">© 2026 CHAINNE Labs. Built for modern operators.</div>
+  </footer>
+</body>
+</html>
