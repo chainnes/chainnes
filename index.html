@@ -3,462 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chainnes | Green Tech Portfolio</title>
+    <title>Chainnes | Something is Growing</title>
     <style>
-        /* =========================================
-           THEME VARIABLES (Solarpunk x Cyberpunk x Cottagecore)
-           ========================================= */
         :root {
             --cyber-dark: #080c0a;
-            --neon-blue: #0066ff; /* Replaced cyan */
             --neon-green: #39ff14;
-            --solar-gold: #f4d03f;
             --earth-wood: #8b5a2b;
+            --solarpunk-leaf: #2ecc71;
             --cottage-cream: #fefae0;
-            --glass-bg: rgba(8, 12, 10, 0.85);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--neon-green) var(--cyber-dark);
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--cyber-dark);
             color: var(--cottage-cream);
-            overflow-x: hidden; /* Prevent horizontal scroll on the whole page */
-            background-image: 
-                linear-gradient(rgba(0, 102, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        /* =========================================
-           FIXED HEADER & NAVIGATION
-           ========================================= */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 70px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--neon-green);
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            z-index: 1000;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
-        }
-
-        .header-left { display: flex; align-items: center; gap: 40px; }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px var(--neon-blue);
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            color: var(--cottage-cream);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-
-        nav a:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green);
-            background: rgba(139, 90, 43, 0.3); /* Cottagecore earth hover */
-        }
-
-        /* Dropdown Styling */
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--glass-bg);
-            border: 1px solid var(--neon-blue);
-            border-radius: 8px;
-            min-width: 150px;
-            flex-direction: column;
-            padding: 10px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .dropdown:hover .dropdown-menu { display: flex; }
-        .dropdown-menu a { padding: 10px 20px; display: block; }
-
-        .btn-launch {
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 0 10px var(--neon-green);
-            transition: transform 0.2s;
-        }
-        .btn-launch:hover { transform: scale(1.05); }
-
-        /* =========================================
-           VERTICAL SCROLL CONTAINER & SECTIONS
-           ========================================= */
-        main {
-            padding-top: 70px; /* Offset for the fixed header */
-            display: flex;
-            flex-direction: column;
-        }
-
-        section {
-            min-height: 100vh; /* Make each section fill the screen vertically */
-            padding: 80px 10%; /* Responsive padding */
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-            border-bottom: 1px solid rgba(139, 90, 43, 0.3); /* Earthy section divider */
-            position: relative;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.05) 0%, transparent 70%),
+                linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px;
         }
 
-        /* Typography & Components */
-        h1, h2 { color: var(--solar-gold); text-shadow: 0 0 5px rgba(244, 208, 63, 0.3); margin-bottom: 20px;}
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; border-bottom: 2px dashed var(--earth-wood); padding-bottom: 10px; display: inline-block;}
-        p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; max-width: 800px; }
-
-        .btn {
-            background: transparent;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 10px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn:hover {
-            background: var(--neon-green);
-            color: #000;
-            box-shadow: 0 0 15px var(--neon-green);
-        }
-
-        /* Card Layouts */
-        .grid-cards { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; 
-            margin-top: 20px; 
-        }
-        
-        .card {
-            background: rgba(139, 90, 43, 0.1);
+        .maintenance-card {
+            background: rgba(139, 90, 43, 0.12);
             border: 1px solid var(--earth-wood);
-            border-radius: 15px;
-            padding: 25px;
-            backdrop-filter: blur(5px);
-            transition: border-color 0.3s;
+            border-radius: 24px;
+            padding: 45px 35px;
+            max-width: 650px;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(46, 204, 113, 0.1);
         }
-        .card:hover { border-color: var(--neon-blue); }
-        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; border: 1px solid #333;}
-        .card-type { font-size: 0.8rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
 
-        /* Horizontal Single-Row Scroller (Specifically for Products) */
-        .h-row {
+        .status-badge {
+            display: inline-block;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--solarpunk-leaf);
+            border: 1px solid var(--solarpunk-leaf);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        }
+
+        h1 {
+            color: var(--neon-green);
+            font-size: 2.1rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: var(--solarpunk-leaf);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .offerings {
             display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding-bottom: 20px;
-            scrollbar-width: thin;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
-        .h-row .card { min-width: 300px; flex: 0 0 auto; }
 
-        /* Welcome Section Hidden Text */
-        #more-about { display: none; margin-top: 20px; color: #ccc; border-left: 3px solid var(--neon-blue); padding-left: 15px;}
-        
-        /* Contact Form */
-        input, textarea {
-            width: 100%; max-width: 500px; padding: 12px; margin-bottom: 15px;
-            background: rgba(0,0,0,0.5); border: 1px solid var(--earth-wood);
-            color: #fff; border-radius: 5px; font-family: inherit;
+        .offering-pill {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--earth-wood);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #dcd7c9;
         }
-        input:focus, textarea:focus { outline: none; border-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green);}
-        
-        footer { text-align: center; padding: 40px 0; color: var(--earth-wood); border-top: 1px solid rgba(139,90,43,0.3); margin-top: 50px;}
 
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--earth-wood), var(--solarpunk-leaf), var(--neon-green));
+            animation: breathe 3s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; box-shadow: 0 0 12px var(--neon-green); }
+            100% { opacity: 0.5; }
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: var(--earth-wood);
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- HEADER & NAVIGATION -->
-    <header>
-        <div class="header-left">
-            <a href="#welcome" class="logo">CHAINNES</a>
-            <nav>
-                <ul>
-                    <li><a href="#welcome" class="nav-link">About</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
-                    <li><a href="#products" class="nav-link">Products</a></li>
-                    <!-- Mapped to blog.html -->
-                    <li><a href="blog.html">Blog</a></li> 
-                    <li class="dropdown">
-                        <a href="#resources" class="nav-link">Resources ▼</a>
-                        <ul class="dropdown-menu">
-                            <!-- Mapped to learn.html and docs.html -->
-                            <li><a href="learn.html">Learn</a></li>
-                            <li><a href="docs.html">Docs</a></li>
-                            <li><a href="#resources" class="nav-link">Case Studies</a></li>
-                            <li><a href="#resources" class="nav-link">News</a></li>
-                            <li><a href="#resources" class="nav-link">Whitepapers</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
+    <div class="maintenance-card">
+        <div class="status-badge">Root System Initializing</div>
+        <h1>Something Rooted is Coming.</h1>
+        <div class="tagline">Build with intelligence, automate with purpose.</div>
+        
+        <div class="offerings">
+            <span class="offering-pill">⚡ Agentic AI Systems</span>
+            <span class="offering-pill">🔄 Custom Workflows</span>
+            <span class="offering-pill">🌱 Solarpunk Tech</span>
         </div>
-        <!-- Right Header Launch Lab button mapped to lab.html -->
-        <a href="lab.html" class="btn-launch">Launch Lab</a>
-    </header>
 
-    <!-- VERTICAL SCROLL MAIN CONTAINER -->
-    <main>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
 
-        <!-- 1. WELCOME SECTION -->
-        <section id="welcome">
-            <h1>Engineering Tomorrow's Green Web.</h1>
-            <p><strong>Tagline:</strong> Civic-tech meets solarpunk sustainability.</p>
-            <p>Hi, I'm Charlene. I build high-performance, eco-conscious software architectures and community problem trackers bridging the gap between digital automation and environmental sustainability.</p>
-            
-            <div>
-                <button class="btn" onclick="toggleAbout()">See More</button>
-            </div>
-            <div id="more-about">
-                <p>My work combines full-stack AI integrations, cloud-native deployments, and data analytics to empower communities. By blending the organic design of cottagecore with the raw technological edge of cyberpunk, I create interfaces that are not only highly functional but visually inspiring.</p>
-            </div>
-        </section>
+        <div class="footer-note">
+            &copy; 2026 Chainnes. Planting the first lines of code.
+        </div>
+    </div>
 
-        <!-- 2. SERVICES SECTION -->
-        <section id="services">
-            <h2>Niche & Skills</h2>
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-type">Expertise</div>
-                    <h3>Technical Services</h3>
-                    <ul style="margin-left: 20px; margin-top: 10px; color: #ccc;">
-                        <li>AI Agent Workflows (n8n, LangChain)</li>
-                        <li>Full Stack Web Apps (React, Firebase)</li>
-                        <li>Data Analytics & Dashboards</li>
-                        <li>Green Tech UI/UX Architecture</li>
-                    </ul>
-                </div>
-                <div class="card" style="border-color: var(--neon-green);">
-                    <div class="card-type">Featured Work</div>
-                    <h3>Civic Issue Tracker</h3>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">A community-driven platform mapping local infrastructure issues with real-time AI triaging.</p>
-                    <div style="margin-top: 15px;">
-                        <a href="#" class="btn">Demo</a>
-                        <a href="#" class="btn" style="border-color: var(--earth-wood); color: var(--earth-wood); margin-left: 10px;">See More Works</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. PRICING SECTION -->
-        <section id="pricing">
-            <h2>Pricing Plans</h2>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3 style="color: var(--earth-wood);">Free Tier</h3>
-                    <h1 style="color: #fff; margin: 15px 0;">$0</h1>
-                    <p>Basic access to public civic trackers and read-only community dashboards.</p>
-                    <br>
-                    <button class="btn">Get Started</button>
-                </div>
-                <div class="card" style="border-color: var(--neon-green); position: relative;">
-                    <div style="position:absolute; top:-10px; right: 20px; background:var(--neon-green); color:#000; padding:2px 10px; border-radius:10px; font-size:0.8rem; font-weight:bold;">POPULAR</div>
-                    <h3 style="color: var(--neon-green);">Starter</h3>
-                    <h1 style="color: #fff; margin: 15px 0;">$29<span style="font-size:1rem;color:#777;">/mo</span></h1>
-                    <p>Includes automated workflows, custom map pins, and standard API access.</p>
-                    <br>
-                    <button class="btn">Subscribe</button>
-                </div>
-                <div class="card">
-                    <h3 style="color: var(--neon-blue);">Business</h3>
-                    <h1 style="color: #fff; margin: 15px 0;">$99<span style="font-size:1rem;color:#777;">/mo</span></h1>
-                    <p>Full AI agent integrations, dedicated data pipelines, and white-labeling.</p>
-                    <br>
-                    <button class="btn">Contact Sales</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. PRODUCTS SECTION -->
-        <section id="products">
-            <h2>Digital Products</h2>
-            <p>Tools, templates, and agents to accelerate your workflow.</p>
-            
-            <!-- Horizontal scroll specifically inside the vertical page -->
-            <div class="h-row">
-                <!-- Product 1 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x150/111/39ff14?text=Dashboard+UI" alt="Dashboard">
-                    <div class="card-type">Dashboard Template</div>
-                    <h3>Eco-Tracker UI</h3>
-                    <div style="margin-top: 15px; display: flex; gap: 10px;">
-                        <button class="btn">Buy $15</button>
-                        <button class="btn" style="border-color: var(--earth-wood); color: var(--earth-wood);">Demo</button>
-                    </div>
-                </div>
-                <!-- Product 2 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x150/111/0066ff?text=AI+Agent" alt="Workflow">
-                    <div class="card-type">n8n Automation</div>
-                    <h3>Triaging Agent</h3>
-                    <div style="margin-top: 15px; display: flex; gap: 10px;">
-                        <button class="btn">Buy $25</button>
-                        <button class="btn" style="border-color: var(--earth-wood); color: var(--earth-wood);">Demo</button>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x150/111/f4d03f?text=PDF+Guide" alt="eBook">
-                    <div class="card-type">ePub / PDF</div>
-                    <h3>Solarpunk Architecture</h3>
-                    <div style="margin-top: 15px; display: flex; gap: 10px;">
-                        <button class="btn">Buy $9</button>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="shop.html" class="btn" style="margin-top: 20px;">See All Products &rarr;</a>
-            </div>
-        </section>
-
-        <!-- 5. BLOG SECTION -->
-        <section id="blog">
-            <h2>Developer Diary & Blog</h2>
-            <p>Casual notes, business insights, and technical write-ups.</p>
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-type">Engineering</div>
-                    <h3>Setting up Firebase App Hosting</h3>
-                    <p style="font-size: 0.9rem; margin-top:10px;">Why I switched from standard hosting to App Hosting for Next.js SSR apps.</p>
-                </div>
-                <div class="card">
-                    <div class="card-type">Casual Note</div>
-                    <h3>The Cottagecore Tech Setup</h3>
-                    <p style="font-size: 0.9rem; margin-top:10px;">Designing a workspace that feels like a forest but runs like a server room.</p>
-                </div>
-            </div>
-            <br>
-            <!-- Explicit link mapped to blog.html -->
-            <div>
-                <a href="blog.html" class="btn">Read full blog &rarr;</a>
-            </div>
-        </section>
-
-        <!-- 6. RESOURCES SECTION -->
-        <section id="resources">
-            <h2>Resources & Courses</h2>
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-type">Case Study</div>
-                    <h3>Philippines Civic Map</h3>
-                    <p style="font-size: 0.9rem;">How crowdsourcing solved 500+ local infrastructure bottlenecks.</p>
-                </div>
-                <div class="card">
-                    <div class="card-type">Whitepaper</div>
-                    <h3>AI in Sustainable Tech</h3>
-                    <p style="font-size: 0.9rem;">Architectural guidelines for deploying low-carbon LLM queries.</p>
-                </div>
-            </div>
-            <br>
-            <!-- Mapped to docs and learn -->
-            <div>
-                <a href="docs.html" class="btn">Developer Docs</a>
-                <a href="learn.html" class="btn" style="margin-left: 10px; border-color: var(--earth-wood); color: var(--earth-wood);">Courses</a>
-            </div>
-        </section>
-
-        <!-- 7. CONTACT SECTION -->
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Let's build something green and futuristic together.</p>
-            <form onsubmit="event.preventDefault(); alert('Message sent!');">
-                <input type="text" placeholder="Your Name" required><br>
-                <input type="email" placeholder="Your Email" required><br>
-                <textarea rows="4" placeholder="How can I help you?" required></textarea><br>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </section>
-
-    </main>
-    
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 Chainnes. All rights reserved.<br>
-        <span style="font-size:0.8rem; color:var(--text-muted);">Crafted with Solarpunk ideals and Cyberpunk code.</span></p>
-    </footer>
-
-    <!-- INTERACTIVITY SCRIPTS -->
-    <script>
-        // Toggle the "See More" text in the Welcome Section
-        function toggleAbout() {
-            const moreText = document.getElementById("more-about");
-            const btn = event.target;
-            if (moreText.style.display === "block") {
-                moreText.style.display = "none";
-                btn.innerText = "See More";
-            } else {
-                moreText.style.display = "block";
-                btn.innerText = "See Less";
-            }
-        }
-
-        // Smooth scroll for navigation links to offset the fixed header
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-                    const targetSection = document.querySelector(targetId);
-                    if(targetSection) {
-                        // Scroll to the section minus the 70px header height
-                        window.scrollTo({
-                            top: targetSection.offsetTop - 70,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>

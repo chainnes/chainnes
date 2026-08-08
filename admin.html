@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chainnes | Blog Admin Editor</title>
+    <style>
+        :root {
+            --cyber-dark: #080c0a;
+            --neon-green: #39ff14;
+            --solar-gold: #f4d03f;
+            --earth-wood: #8b5a2b;
+            --cottage-cream: #fefae0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cyber-dark);
+            color: var(--cottage-cream);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--solar-gold); margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; color: var(--neon-green); font-weight: bold; }
+        input, textarea {
+            width: 100%; padding: 12px;
+            background: rgba(0,0,0,0.5); border: 1px solid var(--earth-wood);
+            color: #fff; border-radius: 5px; font-family: inherit;
+        }
+        textarea { height: 250px; resize: vertical; }
+        input:focus, textarea:focus { outline: none; border-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+        .btn {
+            background: var(--neon-green); color: #000; border: none;
+            padding: 12px 25px; border-radius: 8px; cursor: pointer;
+            font-weight: bold; font-size: 1rem; transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--neon-green); }
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--cottage-cream); text-decoration: none; }
+        .back-link:hover { color: var(--neon-green); }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+    <h1>✍️ Chainnes Blog Editor</h1>
+    <p>Gumawa at mag-publish ng bagong blog post direkta sa iyong Firestore database.</p>
+    <br>
+
+    <form id="blog-form">
+        <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input type="text" id="title" placeholder="Ilagay ang pamagat dito..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category / Tag</label>
+            <input type="text" id="category" placeholder="Halimbawa: Engineering, Casual Note, AI" required>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content (Markdown or HTML supported)</label>
+            <textarea id="content" placeholder="Isulat ang iyong kuwento o mga tala dito..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submit-btn">Publish to Firestore</button>
+    </form>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase functions (gamit ang CDN)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Kunin ang configuration mula sa iyong kasalukuyang firebase setup o ilagay dito
+        // I-link natin ang firebase.js kung meron na, o gagamitin ang default config
+        import { firebaseConfig } from "./firebase.js"; // Siguraduhing may export ka ng config o ilagay direkta kung sakali
+
+        // Kung wala pang export sa firebase.js mo, pwede nating i-hardcode o i-connect. 
+        // Subukan muna nating i-save locally o ikabit sa Firestore mo.
+    </script>
+
+    <script>
+        // Temporary handler para masigurong gumagana ang UI form
+        document.getElementById('blog-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const content = document.getElementById('content').value;
+
+            // Dito natin ilalagay mamaya ang Firestore save command
+            alert(`Na-ready na i-save ang blog na: "${title}"! Ikakabit na natin ang database connection.`);
+        });
+    </script>
+</body>
+</html>
