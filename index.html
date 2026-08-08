@@ -10,12 +10,12 @@
            ========================================= */
         :root {
             --cyber-dark: #080c0a;
-            --neon-cyan: #00f0ff;
+            --neon-blue: #0066ff; /* Replaced cyan */
             --neon-green: #39ff14;
             --solar-gold: #f4d03f;
             --earth-wood: #8b5a2b;
             --cottage-cream: #fefae0;
-            --glass-bg: rgba(8, 12, 10, 0.75);
+            --glass-bg: rgba(8, 12, 10, 0.85);
         }
 
         * {
@@ -26,14 +26,18 @@
             scrollbar-color: var(--neon-green) var(--cyber-dark);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--cyber-dark);
             color: var(--cottage-cream);
-            overflow: hidden; /* Force horizontal scroll only via container */
+            overflow-x: hidden; /* Prevent horizontal scroll on the whole page */
             background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(0, 102, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
@@ -52,21 +56,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 5%;
             z-index: 1000;
             box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
         }
 
-        .header-left { display: flex; align-items: center; gap: 30px; }
+        .header-left { display: flex; align-items: center; gap: 40px; }
         
         .logo {
             font-size: 1.8rem;
             font-weight: 900;
-            color: var(--neon-cyan);
+            color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 8px var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-blue);
             cursor: pointer;
+            text-decoration: none;
         }
 
         nav ul {
@@ -99,7 +104,7 @@
             top: 100%;
             left: 0;
             background: var(--glass-bg);
-            border: 1px solid var(--neon-cyan);
+            border: 1px solid var(--neon-blue);
             border-radius: 8px;
             min-width: 150px;
             flex-direction: column;
@@ -110,8 +115,8 @@
         .dropdown-menu a { padding: 10px 20px; display: block; }
 
         .btn-launch {
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan));
-            color: #000;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: #fff;
             padding: 8px 20px;
             border-radius: 20px;
             font-weight: bold;
@@ -122,35 +127,22 @@
         .btn-launch:hover { transform: scale(1.05); }
 
         /* =========================================
-           HORIZONTAL SCROLL CONTAINER
+           VERTICAL SCROLL CONTAINER & SECTIONS
            ========================================= */
-        .scroll-container {
+        main {
+            padding-top: 70px; /* Offset for the fixed header */
             display: flex;
-            width: 100vw;
-            height: 100vh;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding-top: 70px; /* Offset for header */
+            flex-direction: column;
         }
 
         section {
-            min-width: 100vw;
-            height: calc(100vh - 70px);
-            scroll-snap-align: start;
-            padding: 40px 80px;
-            overflow-y: auto; /* Allow vertical scroll inside sections if needed */
+            min-height: 100vh; /* Make each section fill the screen vertically */
+            padding: 80px 10%; /* Responsive padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid rgba(139, 90, 43, 0.3); /* Earthy section divider */
             position: relative;
-        }
-
-        /* Thematic Section Borders (Earthy/Cyber fusion) */
-        section::after {
-            content: '';
-            position: absolute;
-            top: 10%; right: 0;
-            width: 2px; height: 80%;
-            background: linear-gradient(to bottom, transparent, var(--earth-wood), var(--neon-green), transparent);
         }
 
         /* Typography & Components */
@@ -178,22 +170,26 @@
         }
 
         /* Card Layouts */
-        .grid-cards { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .grid-cards { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-top: 20px; 
+        }
+        
         .card {
             background: rgba(139, 90, 43, 0.1);
             border: 1px solid var(--earth-wood);
             border-radius: 15px;
             padding: 25px;
-            flex: 1;
-            min-width: 250px;
             backdrop-filter: blur(5px);
             transition: border-color 0.3s;
         }
-        .card:hover { border-color: var(--neon-cyan); }
-        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; border: 1px solid #333;}
-        .card-type { font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+        .card:hover { border-color: var(--neon-blue); }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; border: 1px solid #333;}
+        .card-type { font-size: 0.8rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
 
-        /* Horizontal Single-Row Scroller (For Products) */
+        /* Horizontal Single-Row Scroller (Specifically for Products) */
         .h-row {
             display: flex;
             overflow-x: auto;
@@ -204,7 +200,7 @@
         .h-row .card { min-width: 300px; flex: 0 0 auto; }
 
         /* Welcome Section Hidden Text */
-        #more-about { display: none; margin-top: 20px; color: #ccc; border-left: 3px solid var(--neon-cyan); padding-left: 15px;}
+        #more-about { display: none; margin-top: 20px; color: #ccc; border-left: 3px solid var(--neon-blue); padding-left: 15px;}
         
         /* Contact Form */
         input, textarea {
@@ -214,7 +210,7 @@
         }
         input:focus, textarea:focus { outline: none; border-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green);}
         
-        footer { text-align: center; margin-top: 100px; color: var(--earth-wood); }
+        footer { text-align: center; padding: 40px 0; color: var(--earth-wood); border-top: 1px solid rgba(139,90,43,0.3); margin-top: 50px;}
 
     </style>
 </head>
@@ -223,24 +219,24 @@
     <!-- HEADER & NAVIGATION -->
     <header>
         <div class="header-left">
-            <div class="logo" onclick="document.getElementById('scroller').scrollLeft = 0">CHAINNES</div>
+            <a href="#welcome" class="logo">CHAINNES</a>
             <nav>
                 <ul>
                     <li><a href="#welcome" class="nav-link">About</a></li>
                     <li><a href="#services" class="nav-link">Services</a></li>
                     <li><a href="#pricing" class="nav-link">Pricing</a></li>
                     <li><a href="#products" class="nav-link">Products</a></li>
-                    <!-- Mapped to blog.html as requested -->
+                    <!-- Mapped to blog.html -->
                     <li><a href="blog.html">Blog</a></li> 
                     <li class="dropdown">
                         <a href="#resources" class="nav-link">Resources ▼</a>
                         <ul class="dropdown-menu">
-                            <!-- Mapped to learn.html and docs.html as requested -->
+                            <!-- Mapped to learn.html and docs.html -->
                             <li><a href="learn.html">Learn</a></li>
                             <li><a href="docs.html">Docs</a></li>
-                            <li><a href="#resources">Case Studies</a></li>
-                            <li><a href="#resources">News</a></li>
-                            <li><a href="#resources">Whitepapers</a></li>
+                            <li><a href="#resources" class="nav-link">Case Studies</a></li>
+                            <li><a href="#resources" class="nav-link">News</a></li>
+                            <li><a href="#resources" class="nav-link">Whitepapers</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -251,8 +247,8 @@
         <a href="lab.html" class="btn-launch">Launch Lab</a>
     </header>
 
-    <!-- HORIZONTAL SCROLL MAIN CONTAINER -->
-    <main class="scroll-container" id="scroller">
+    <!-- VERTICAL SCROLL MAIN CONTAINER -->
+    <main>
 
         <!-- 1. WELCOME SECTION -->
         <section id="welcome">
@@ -260,7 +256,9 @@
             <p><strong>Tagline:</strong> Civic-tech meets solarpunk sustainability.</p>
             <p>Hi, I'm Charlene. I build high-performance, eco-conscious software architectures and community problem trackers bridging the gap between digital automation and environmental sustainability.</p>
             
-            <button class="btn" onclick="toggleAbout()">See More</button>
+            <div>
+                <button class="btn" onclick="toggleAbout()">See More</button>
+            </div>
             <div id="more-about">
                 <p>My work combines full-stack AI integrations, cloud-native deployments, and data analytics to empower communities. By blending the organic design of cottagecore with the raw technological edge of cyberpunk, I create interfaces that are not only highly functional but visually inspiring.</p>
             </div>
@@ -286,7 +284,7 @@
                     <p style="font-size: 0.9rem; margin-top: 10px;">A community-driven platform mapping local infrastructure issues with real-time AI triaging.</p>
                     <div style="margin-top: 15px;">
                         <a href="#" class="btn">Demo</a>
-                        <a href="#" class="btn" style="border-color: var(--earth-wood); color: var(--earth-wood);">See More Works</a>
+                        <a href="#" class="btn" style="border-color: var(--earth-wood); color: var(--earth-wood); margin-left: 10px;">See More Works</a>
                     </div>
                 </div>
             </div>
@@ -300,6 +298,7 @@
                     <h3 style="color: var(--earth-wood);">Free Tier</h3>
                     <h1 style="color: #fff; margin: 15px 0;">$0</h1>
                     <p>Basic access to public civic trackers and read-only community dashboards.</p>
+                    <br>
                     <button class="btn">Get Started</button>
                 </div>
                 <div class="card" style="border-color: var(--neon-green); position: relative;">
@@ -307,12 +306,14 @@
                     <h3 style="color: var(--neon-green);">Starter</h3>
                     <h1 style="color: #fff; margin: 15px 0;">$29<span style="font-size:1rem;color:#777;">/mo</span></h1>
                     <p>Includes automated workflows, custom map pins, and standard API access.</p>
+                    <br>
                     <button class="btn">Subscribe</button>
                 </div>
                 <div class="card">
-                    <h3 style="color: var(--neon-cyan);">Business</h3>
+                    <h3 style="color: var(--neon-blue);">Business</h3>
                     <h1 style="color: #fff; margin: 15px 0;">$99<span style="font-size:1rem;color:#777;">/mo</span></h1>
                     <p>Full AI agent integrations, dedicated data pipelines, and white-labeling.</p>
+                    <br>
                     <button class="btn">Contact Sales</button>
                 </div>
             </div>
@@ -323,6 +324,7 @@
             <h2>Digital Products</h2>
             <p>Tools, templates, and agents to accelerate your workflow.</p>
             
+            <!-- Horizontal scroll specifically inside the vertical page -->
             <div class="h-row">
                 <!-- Product 1 -->
                 <div class="card">
@@ -336,7 +338,7 @@
                 </div>
                 <!-- Product 2 -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/300x150/111/00f0ff?text=AI+Agent" alt="Workflow">
+                    <img src="https://via.placeholder.com/300x150/111/0066ff?text=AI+Agent" alt="Workflow">
                     <div class="card-type">n8n Automation</div>
                     <h3>Triaging Agent</h3>
                     <div style="margin-top: 15px; display: flex; gap: 10px;">
@@ -354,7 +356,9 @@
                     </div>
                 </div>
             </div>
-            <a href="shop.html" class="btn" style="margin-top: 10px;">See All Products &rarr;</a>
+            <div>
+                <a href="shop.html" class="btn" style="margin-top: 20px;">See All Products &rarr;</a>
+            </div>
         </section>
 
         <!-- 5. BLOG SECTION -->
@@ -374,8 +378,10 @@
                 </div>
             </div>
             <br>
-            <!-- Explicit link mapped to blog.html as requested -->
-            <a href="blog.html" class="btn">Read full blog &rarr;</a>
+            <!-- Explicit link mapped to blog.html -->
+            <div>
+                <a href="blog.html" class="btn">Read full blog &rarr;</a>
+            </div>
         </section>
 
         <!-- 6. RESOURCES SECTION -->
@@ -394,12 +400,14 @@
                 </div>
             </div>
             <br>
-            <!-- Mapped to docs and learn as requested -->
-            <a href="docs.html" class="btn">Developer Docs</a>
-            <a href="learn.html" class="btn" style="margin-left: 10px; border-color: var(--earth-wood); color: var(--earth-wood);">Courses</a>
+            <!-- Mapped to docs and learn -->
+            <div>
+                <a href="docs.html" class="btn">Developer Docs</a>
+                <a href="learn.html" class="btn" style="margin-left: 10px; border-color: var(--earth-wood); color: var(--earth-wood);">Courses</a>
+            </div>
         </section>
 
-        <!-- 7 & 8. CONTACT & FOOTER SECTION -->
+        <!-- 7. CONTACT SECTION -->
         <section id="contact">
             <h2>Contact Me</h2>
             <p>Let's build something green and futuristic together.</p>
@@ -409,14 +417,15 @@
                 <textarea rows="4" placeholder="How can I help you?" required></textarea><br>
                 <button type="submit" class="btn">Send Message</button>
             </form>
-            
-            <footer>
-                <p>&copy; 2026 Chainnes. All rights reserved.<br>
-                <span style="font-size:0.8rem; color:var(--text-muted);">Crafted with Solarpunk ideals and Cyberpunk code.</span></p>
-            </footer>
         </section>
 
     </main>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Chainnes. All rights reserved.<br>
+        <span style="font-size:0.8rem; color:var(--text-muted);">Crafted with Solarpunk ideals and Cyberpunk code.</span></p>
+    </footer>
 
     <!-- INTERACTIVITY SCRIPTS -->
     <script>
@@ -433,18 +442,7 @@
             }
         }
 
-        // Convert Vertical Mouse Wheel Scrolling to Horizontal Scrolling
-        const scroller = document.getElementById('scroller');
-        scroller.addEventListener('wheel', (evt) => {
-            // Prevent default vertical scroll ONLY if we are scrolling the main container
-            // and not inside a vertically scrollable card/element
-            if(evt.deltaY !== 0) {
-                evt.preventDefault();
-                scroller.scrollLeft += evt.deltaY * 2;
-            }
-        }, { passive: false });
-
-        // Smooth scroll navigation links for horizontal layout
+        // Smooth scroll for navigation links to offset the fixed header
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -452,8 +450,9 @@
                     e.preventDefault();
                     const targetSection = document.querySelector(targetId);
                     if(targetSection) {
-                        scroller.scrollTo({
-                            left: targetSection.offsetLeft,
+                        // Scroll to the section minus the 70px header height
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 70,
                             behavior: 'smooth'
                         });
                     }
