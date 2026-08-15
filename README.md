@@ -1,91 +1,59 @@
-# CHAINNE Labs
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=10B981&height=200&section=header&text=Hello!%20I'm%20Charlene%20Anne%20Cordero&fontSize=30&fontAlignY=38&desc=AI%20Engineer%20|%20Full%20Stack%20Web%20Developer%20|%20Solarpunk%20Architect&descAlignY=58&descAlign=50" />
+</div>
 
-> **Agentic AI & Workflow Automation — Freelance Studio**
-> *Chai + Anne = Intelligent Chains.*
+### 🌿 Building Decentralized Green Infrastructure & Agentic AI
 
-CHAINNE is a forward-thinking studio specializing in agentic AI, workflow automation, digital products, and self-hosted deployment support. This repository now includes a fuller storefront experience with blog content, documentation, API concepts, sign-in and signup flows, and a payments page.
+I am an AI Engineer and Full Stack Web Developer focused on building local-first, privacy-respecting autonomous systems. I blend high-performance edge computing with a solarpunk aesthetic to create technology that serves the community, reduces e-waste, and automates with purpose. 
 
----
-
-## 🗂️ Project Structure
-
-```text
-chainne-labs/
-├── assets/
-│   ├── chainne-logo.svg
-│   └── favicon.svg
-├── chainne.html          # Main marketing site
-├── lab.html              # Interactive CHAINNE Labs platform
-├── blog.html             # Blog hub
-├── blog-agentic-workflows.html
-├── blog-self-hosted-automation.html
-├── docs.html             # Product documentation hub
-├── chainne-api.html      # API reference / integration page
-├── self-hosted.html      # Self-hosted deployment overview
-├── signin.html           # Sign in page
-├── signup.html           # Sign up page
-├── payments.html         # Subscription and plan selection page
-└── README.md             # This file
-```
+When I am not writing Python scrapers or configuring ReAct agent loops, I am likely hunting bugs, running 16km races, or singing acapella.
 
 ---
 
-## 📄 Core Pages
+### 🚀 Launching October 10, 2026: [CHAINNES](#)
+I am the founder and lead architect of **CHAINNES**, a freelance studio specializing in eco-automation and intelligent digital products. 
 
-- `chainne.html` — Main portfolio and storefront experience with services, showcase, products, and CTA links.
-- `lab.html` — Interactive agent builder experience for users exploring workflows.
-- `blog.html` — Real blog hub with article entry points.
-- `docs.html` — Documentation landing page for setup and deployment guidance.
-- `chainne-api.html` — API overview for workflow and webhook integration.
-- `self-hosted.html` — Self-hosted deployment positioning for privacy-first teams.
-- `signin.html` and `signup.html` — Authentication entry pages.
-- `payments.html` — Plan and subscription selection experience.
+*   🧪 **Clab (Chainnes Lab):** My interactive agent builder and testing environment.
+*   📝 **Clog (Chainnes Log):** My publication hub for technical deep-dives and solarpunk philosophies.
+*   🤖 **Current Focus:** Building **S.E.B. (Symbiotic Eco Brain)**, a local-first, empathetic AI companion framework powered by FastMCP and the Web Speech API.
 
 ---
 
-## 🛠️ Tech Stack
+### 💻 The Tech Stack
 
-- HTML5 structure
-- Tailwind CSS (CDN)
-- Vanilla JavaScript for the lab experience
-- SVG branding assets for logo and favicon
+I prioritize a 100% free, low-power, and privacy-first infrastructure stack:
 
----
-
-## 🚀 How to Run Locally
-
-No build steps are required. Open any page directly in a browser:
-
-```bash
-open chainne-labs/chainne.html
-```
-
-You can also open the lab experience here:
-
-```bash
-open chainne-labs/lab.html
-```
+*   **Languages:** Python, JavaScript (Vanilla), HTML5, CSS3 (Tailwind)
+*   **Edge & Hosting:** Cloudflare Workers, Cloudflare Pages
+*   **Database & Auth:** Supabase (PostgreSQL)
+*   **AI & Inference:** Ollama (Local Models / Ornith-1.0), Groq API, Gemini API, Model Context Protocol (MCP)
+*   **Workflow Automation:** n8n (Self-hosted), ReAct Architecture
+*   **Security:** Ethical Hacking & Bug Bounty Hunting
 
 ---
 
-## 💡 Suggested Products to Sell More
+### 🌱 What I'm Currently Working On
 
-To expand the business model, the following offers could be added next:
-
-- AI SOP playbooks for small businesses
-- Workflow audit packages for operations teams
-- Prompt packs for niche verticals like real estate, recruiting, and support
-- Private GPT / internal knowledge base setup kits
-- Notion + Airtable automation templates for agencies
-- Done-for-you onboarding automation packages
+- ⚙️ Packaging zero-cost **Eco-Automation Templates** (Permaculture & Smart-grid monitors).
+- 🕵️‍♀️ Developing the **Talent Scout Agent**, an autonomous data scraper and ReAct filtering pipeline.
+- 🖥️ Refining **Mac Sentinel**, a local-first diagnostic agent to prevent hardware degradation.
+- ✍️ Writing content for my personal brand **Codes & Wanders**.
 
 ---
 
-## 📬 Contact
+### ⚡ Beyond the Screen
 
-Built and maintained by Charlene Anne Cordero.
-- Email: hello@chainne.ai
-- Web: chainne.html
+I believe in the multithreaded life. When I step away from VS Code, you can find me:
+- 🏃‍♀️ Training for my next marathon or OCR event in my Alphaflys.
+- 🎤 At weekend rehearsals and workshops with my vocal group, Amplify.
+- 🍵 Exploring cafe terminal lounges or coastal waves.
+- 🎸 Playing the ukulele, baking, and painting.
 
 ---
-© 2026 CHAINNE Labs. All rights reserved.
+
+<div align="center">
+  <p><b>Let's build something rooted in intelligence.</b></p>
+  <a href="mailto:hello@chainne.ai">
+    <img src="https://img.shields.io/badge/Email-hello%40chainne.ai-10B981?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+</div>
