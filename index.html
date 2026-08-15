@@ -1,150 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chainnes | Something is Growing</title>
     <style>
-        :root {
-            --cyber-dark: #080c0a;
-            --neon-green: #39ff14;
-            --earth-wood: #8b5a2b;
-            --solarpunk-leaf: #2ecc71;
-            --cottage-cream: #fefae0;
-        }
+      :root {
+        --cyber-dark: #080c0a;
+        --neon-green: #39ff14;
+        --earth-wood: #8b5a2b;
+        --solarpunk-leaf: #2ecc71;
+        --cottage-cream: #fefae0;
+      }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--cyber-dark);
-            color: var(--cottage-cream);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.05) 0%, transparent 70%),
-                linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--cyber-dark);
+        color: var(--cottage-cream);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background-image:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(46, 204, 113, 0.05) 0%,
+            transparent 70%
+          ),
+          linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          30px 30px;
+      }
 
-        .maintenance-card {
-            background: rgba(139, 90, 43, 0.12);
-            border: 1px solid var(--earth-wood);
-            border-radius: 24px;
-            padding: 45px 35px;
-            max-width: 650px;
-            width: 100%;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 0 40px rgba(46, 204, 113, 0.1);
-        }
+      .maintenance-card {
+        background: rgba(139, 90, 43, 0.12);
+        border: 1px solid var(--earth-wood);
+        border-radius: 24px;
+        padding: 45px 35px;
+        max-width: 650px;
+        width: 100%;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 40px rgba(46, 204, 113, 0.1);
+      }
 
-        .status-badge {
-            display: inline-block;
-            background: rgba(46, 204, 113, 0.1);
-            color: var(--solarpunk-leaf);
-            border: 1px solid var(--solarpunk-leaf);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
-        }
+      .status-badge {
+        display: inline-block;
+        background: rgba(46, 204, 113, 0.1);
+        color: var(--solarpunk-leaf);
+        border: 1px solid var(--solarpunk-leaf);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+      }
 
-        h1 {
-            color: var(--neon-green);
-            font-size: 2.1rem;
-            margin-bottom: 12px;
-            text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
-            line-height: 1.2;
-        }
+      h1 {
+        color: var(--neon-green);
+        font-size: 2.1rem;
+        margin-bottom: 12px;
+        text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+        line-height: 1.2;
+      }
 
-        .tagline {
-            font-size: 0.95rem;
-            color: var(--solarpunk-leaf);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-        }
+      .tagline {
+        font-size: 0.95rem;
+        color: var(--solarpunk-leaf);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+      }
 
-        .offerings {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
+      .offerings {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
 
-        .offering-pill {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--earth-wood);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: #dcd7c9;
-        }
+      .offering-pill {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--earth-wood);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #dcd7c9;
+      }
 
-        .progress-container {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 25px;
-        }
+      .progress-container {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 25px;
+      }
 
-        .progress-bar {
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--earth-wood), var(--solarpunk-leaf), var(--neon-green));
-            animation: breathe 3s infinite ease-in-out;
-        }
+      .progress-bar {
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--earth-wood),
+          var(--solarpunk-leaf),
+          var(--neon-green)
+        );
+        animation: breathe 3s infinite ease-in-out;
+      }
 
-        @keyframes breathe {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; box-shadow: 0 0 12px var(--neon-green); }
-            100% { opacity: 0.5; }
+      @keyframes breathe {
+        0% {
+          opacity: 0.5;
         }
+        50% {
+          opacity: 1;
+          box-shadow: 0 0 12px var(--neon-green);
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
 
-        .footer-note {
-            font-size: 0.85rem;
-            color: var(--earth-wood);
-            letter-spacing: 0.5px;
-        }
+      .footer-note {
+        font-size: 0.85rem;
+        color: var(--earth-wood);
+        letter-spacing: 0.5px;
+      }
+      /* Palakihin ang pagitan bago mag-footer */
+      .contact-subtext {
+        margin-bottom: 30px; /* Dito mo i-adjust kung gaano kalayo ang gusto mo */
+      }
+
+      /* O kung may specific class ka para sa footer mo */
+      footer,
+      .footer {
+        margin-top: 40px;
+      }
+      .contact-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #008000; /* Pwede mong palitan ng kulay na sang-ayon sa tema mo */
+        color: #ffffff;
+        font-family: inherit;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+      }
+
+      .contact-btn:hover {
+        background-color: #006400;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="maintenance-card">
-        <div class="status-badge">Root System Initializing</div>
-        <h1>Something Rooted is Coming.</h1>
-        <div class="tagline">Build with intelligence, automate with purpose.</div>
-        
-        <div class="offerings">
-            <span class="offering-pill">⚡ Agentic AI Systems</span>
-            <span class="offering-pill">🔄 Custom Workflows</span>
-            <span class="offering-pill">🌱 Solarpunk Tech</span>
-        </div>
+      <div class="status-badge">Root System Initializing</div>
+      <h1>Something Rooted is Coming.</h1>
+      <div class="tagline">Build with intelligence, automate with purpose.</div>
 
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
+      <div class="offerings">
+        <span class="offering-pill">⚡ Agentic AI Systems</span>
+        <span class="offering-pill">🔄 Automation Workflows</span>
+        <span class="offering-pill">🌱 Solarpunk Tech</span>
+      </div>
 
-        <div class="footer-note">
-            &copy; 2026 Chainnes. Planting the first lines of code.
-        </div>
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+      <div >
+        <a href="mailto:admin@chainnes.com" class="contact-btn">Contact</a>
+        <p class="contact-subtext">
+          Ready to automate your workflows? Let's talk systems.
+        </p>
+      </div>
+      <div class="footer-note">
+        &copy; 2026 Chainnes. Planting the first lines of code.
+      </div>
     </div>
-
-</body>
+  </body>
 </html>
