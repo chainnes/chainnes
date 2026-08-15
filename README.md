@@ -1,4 +1,4 @@
-# CHAINNE Labs
+# CHAINNES
 
 > **Agentic AI & Workflow Automation — Freelance Studio**
 > *Chai + Anne = Intelligent Chains.*
