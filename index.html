@@ -23,7 +23,7 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--cyber-dark);
         color: var(--cottage-cream);
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -101,6 +101,49 @@
         color: #dcd7c9;
       }
 
+      /* Countdown Timer Styles */
+      .countdown-wrapper {
+        margin-bottom: 30px;
+      }
+
+      .countdown-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--solarpunk-leaf);
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
+
+      .countdown-grid {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .countdown-box {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--earth-wood);
+        border-radius: 10px;
+        padding: 10px 14px;
+        min-width: 70px;
+      }
+
+      .countdown-value {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--neon-green);
+        font-family: monospace;
+      }
+
+      .countdown-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        color: #a8a29e;
+        margin-top: 4px;
+        letter-spacing: 1px;
+      }
+
       .progress-container {
         width: 100%;
         height: 6px;
@@ -135,35 +178,39 @@
         }
       }
 
+      .action-area {
+        margin-bottom: 30px;
+      }
+
+      .contact-subtext {
+        font-size: 0.9rem;
+        color: #dcd7c9;
+        margin-bottom: 15px;
+      }
+
+      .contact-btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background-color: var(--solarpunk-leaf);
+        color: var(--cyber-dark);
+        font-family: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+      }
+
+      .contact-btn:hover {
+        background-color: var(--neon-green);
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+        transform: translateY(-1px);
+      }
+
       .footer-note {
         font-size: 0.85rem;
         color: var(--earth-wood);
         letter-spacing: 0.5px;
-      }
-      /* Palakihin ang pagitan bago mag-footer */
-      .contact-subtext {
-        margin-bottom: 30px; /* Dito mo i-adjust kung gaano kalayo ang gusto mo */
-      }
-
-      /* O kung may specific class ka para sa footer mo */
-      footer,
-      .footer {
-        margin-top: 40px;
-      }
-      .contact-btn {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: #008000; /* Pwede mong palitan ng kulay na sang-ayon sa tema mo */
-        color: #ffffff;
-        font-family: inherit;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: background-color 0.2s ease;
-      }
-
-      .contact-btn:hover {
-        background-color: #006400;
       }
     </style>
   </head>
@@ -179,18 +226,71 @@
         <span class="offering-pill">🌱 Solarpunk Tech</span>
       </div>
 
+      <div class="countdown-wrapper">
+        <div class="countdown-title">Countdown to The Great Germination (10.10.26)</div>
+        <div class="countdown-grid">
+          <div class="countdown-box">
+            <div id="days" class="countdown-value">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-box">
+            <div id="hours" class="countdown-value">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-box">
+            <div id="minutes" class="countdown-value">00</div>
+            <div class="countdown-label">Mins</div>
+          </div>
+          <div class="countdown-box">
+            <div id="seconds" class="countdown-value">00</div>
+            <div class="countdown-label">Secs</div>
+          </div>
+        </div>
+      </div>
+
       <div class="progress-container">
         <div class="progress-bar"></div>
       </div>
-      <div >
-        <a href="mailto:admin@chainnes.com" class="contact-btn">Contact</a>
+
+      <div class="action-area">
         <p class="contact-subtext">
           Ready to automate your workflows? Let's talk systems.
         </p>
+        <a href="mailto:admin@chainnes.com" class="contact-btn">Contact</a>
       </div>
+
       <div class="footer-note">
         &copy; 2026 Chainnes. Planting the first lines of code.
       </div>
     </div>
+
+    <script>
+      // Set the launch date to October 10, 2026, 00:00:00
+      const launchDate = new Date("October 10, 2026 00:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = launchDate - now;
+
+        if (timeLeft < 0) {
+          document.querySelector(".countdown-title").innerText = "The Great Germination Has Begun!";
+          document.querySelector(".countdown-grid").style.display = "none";
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, "0");
+        document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
   </body>
 </html>
