@@ -21,7 +21,7 @@ I am the founder and lead architect of **CHAINNES**, a freelance studio speciali
 
 ### 💻 The Tech Stack
 
-I prioritize a 100% free, low-power, and privacy-first infrastructure stack:
+I prioritize an open-source, low-power, and privacy-first infrastructure stack:
 
 *   **Languages:** Python, JavaScript (Vanilla), HTML5, CSS3 (Tailwind)
 *   **Edge & Hosting:** Cloudflare Workers, Cloudflare Pages
@@ -37,23 +37,23 @@ I prioritize a 100% free, low-power, and privacy-first infrastructure stack:
 - ⚙️ Packaging zero-cost **Eco-Automation Templates** (Permaculture & Smart-grid monitors).
 - 🕵️‍♀️ Developing the **Talent Scout Agent**, an autonomous data scraper and ReAct filtering pipeline.
 - 🖥️ Refining **Mac Sentinel**, a local-first diagnostic agent to prevent hardware degradation.
-- ✍️ Writing content for my personal brand **Codes & Wanders**.
+- ✍️ Writing content for my personal brand **Coding Wanderess**.
 
 ---
 
 ### ⚡ Beyond the Screen
 
 I believe in the multithreaded life. When I step away from VS Code, you can find me:
-- 🏃‍♀️ Training for my next marathon or OCR event in my Alphaflys.
-- 🎤 At weekend rehearsals and workshops with my vocal group, Amplify.
-- 🍵 Exploring cafe terminal lounges or coastal waves.
-- 🎸 Playing the ukulele, baking, and painting.
+- 🏃‍♀️ Training for my next marathon or OCR event.
+- 🎤 At weekend crafting or attending workshops.
+- 🍵 Exploring cafe lounges or coastal waves.
+- 🎸 Playing the ukulele, gaming and reading.
 
 ---
 
 <div align="center">
   <p><b>Let's build something rooted in intelligence.</b></p>
-  <a href="mailto:hello@chainne.ai">
+  <a href="mailto:hello@charlenecordero.com">
     <img src="https://img.shields.io/badge/Email-hello%40chainne.ai-10B981?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
   </a>
 </div>
