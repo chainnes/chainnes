@@ -53,7 +53,7 @@ I believe in the multithreaded life. When I step away from VS Code, you can find
 
 <div align="center">
   <p><b>Let's build something rooted in intelligence.</b></p>
-  <a href="mailto:hello@charlenecordero.com">
-    <img src="https://img.shields.io/badge/Email-hello%40charlenecordero-com-10B981?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  📧<a href="mailto:hello@charlenecordero.com">
+     hello@charlenecordero.com
   </a>
 </div>
