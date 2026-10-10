@@ -1,343 +1,312 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chainnes | Something is Growing</title>
-    <style>
-      :root {
-        --cyber-dark: #080c0a;
-        --neon-green: #39ff14;
-        --earth-wood: #8b5a2b;
-        --solarpunk-leaf: #2ecc71;
-        --cottage-cream: #fefae0;
+<!DOCTYPE html>
+<html lang="en" class="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chainnes | Build with intelligence</title>
+  <meta name="description" content="Chainnes is Charlene Anne Cordero’s one-person solarpunk studio in the Philippines. Build with intelligence. Automate with purpose.">
+  <link rel="canonical" href="https://chainnes.com/">
+  <meta property="og:title" content="Chainnes — Build with intelligence. Automate with purpose.">
+  <meta property="og:description" content="A one-person solarpunk studio in the Philippines for regenerative technology: business intelligence, full-stack development, AI and automation, IoT and robotics, AR and VR.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chainnes.com/">
+  <meta property="og:image" content="https://chainnes.com/assets/images/chainnes-logo-day.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chainnes — Build with intelligence. Automate with purpose.">
+  <meta name="twitter:description" content="A one-person solarpunk studio in the Philippines for regenerative, harmless technology.">
+  <link rel="icon" type="image/png" href="/assets/images/chainnes-logo-day.png">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("chainnes-theme");
+        var theme = stored === "day" || stored === "night"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
+        document.documentElement.setAttribute("data-theme", theme);
+        var icon = document.querySelector('link[rel="icon"]');
+        if (icon) icon.href = theme === "night" ? "/assets/images/chainnes-logo.png" : "/assets/images/chainnes-logo-day.png";
+      } catch (error) {
+        document.documentElement.setAttribute("data-theme", "day");
       }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--cyber-dark);
-        color: var(--cottage-cream);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        background-image:
-          radial-gradient(
-            circle at 50% 50%,
-            rgba(46, 204, 113, 0.05) 0%,
-            transparent 70%
-          ),
-          linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px);
-        background-size:
-          100% 100%,
-          30px 30px;
-      }
-
-      .maintenance-card {
-        background: rgba(139, 90, 43, 0.12);
-        border: 1px solid var(--earth-wood);
-        border-radius: 24px;
-        padding: 45px 35px;
-        max-width: 650px;
-        width: 100%;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 0 40px rgba(46, 204, 113, 0.1);
-      }
-
-      .status-badge {
-        display: inline-block;
-        background: rgba(46, 204, 113, 0.1);
-        color: var(--solarpunk-leaf);
-        border: 1px solid var(--solarpunk-leaf);
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 20px;
-        box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
-      }
-
-      h1 {
-        color: var(--neon-green);
-        font-size: 2.1rem;
-        margin-bottom: 12px;
-        text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
-        line-height: 1.2;
-      }
-
-      .tagline {
-        font-size: 0.95rem;
-        color: var(--solarpunk-leaf);
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 25px;
-      }
-
-      .offerings {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-      }
-
-      .offering-pill {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid var(--earth-wood);
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        color: #dcd7c9;
-      }
-
-      /* Countdown Timer Styles */
-      .countdown-wrapper {
-        margin-bottom: 30px;
-      }
-
-      .countdown-title {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--solarpunk-leaf);
-        margin-bottom: 12px;
-        font-weight: 700;
-      }
-
-      .countdown-grid {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-      }
-
-      .countdown-box {
-        background: rgba(0, 0, 0, 0.5);
-        border: 1px solid var(--earth-wood);
-        border-radius: 10px;
-        padding: 10px 14px;
-        min-width: 70px;
-      }
-
-      .countdown-value {
-        font-size: 1.4rem;
-        font-weight: bold;
-        color: var(--neon-green);
-        font-family: monospace;
-      }
-
-      .countdown-label {
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        color: #a8a29e;
-        margin-top: 4px;
-        letter-spacing: 1px;
-      }
-
-      .progress-container {
-        width: 100%;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 3px;
-        overflow: hidden;
-        margin-bottom: 25px;
-      }
-
-      .progress-bar {
-        width: 40%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          var(--earth-wood),
-          var(--solarpunk-leaf),
-          var(--neon-green)
-        );
-        animation: breathe 3s infinite ease-in-out;
-      }
-
-      @keyframes breathe {
-        0% {
-          opacity: 0.5;
-        }
-        50% {
-          opacity: 1;
-          box-shadow: 0 0 12px var(--neon-green);
-        }
-        100% {
-          opacity: 0.5;
-        }
-      }
-
-      .action-area {
-        margin-bottom: 25px;
-      }
-
-      .contact-subtext {
-        font-size: 0.9rem;
-        color: #dcd7c9;
-        margin-bottom: 15px;
-      }
-
-      .contact-btn {
-        display: inline-block;
-        padding: 12px 28px;
-        background-color: var(--solarpunk-leaf);
-        color: var(--cyber-dark);
-        font-family: inherit;
-        font-weight: 700;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-        box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
-      }
-
-      .contact-btn:hover {
-        background-color: var(--neon-green);
-        box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
-        transform: translateY(-1px);
-      }
-
-      /* Social Links Styles */
-      .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 25px;
-      }
-
-      .social-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid var(--earth-wood);
-        border-radius: 50%;
-        color: var(--cottage-cream);
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
-
-      .social-icon svg {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
-      }
-
-      .social-icon:hover {
-        border-color: var(--solarpunk-leaf);
-        color: var(--neon-green);
-        box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
-        transform: translateY(-2px);
-      }
-
-      .footer-note {
-        font-size: 0.85rem;
-        color: var(--earth-wood);
-        letter-spacing: 0.5px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="maintenance-card">
-      <div class="status-badge">Root System Initializing</div>
-      <h1>Something Rooted is Coming.</h1>
-      <div class="tagline">Build with intelligence, automate with purpose.</div>
-
-      <div class="offerings">
-        <span class="offering-pill">⚡ Agentic AI Systems</span>
-        <span class="offering-pill">🔄 Automation Workflows</span>
-        <span class="offering-pill">🌱 Solarpunk Tech</span>
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,680;1,9..144,520;1,9..144,680&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#intro">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#intro">
+      <img class="logo-day" src="/assets/images/chainnes-logo-day.png" alt="" width="36" height="36">
+      <img class="logo-night" src="/assets/images/chainnes-logo.png" alt="" width="36" height="36">
+      <span>Chainnes</span>
+    </a>
+    <nav id="site-nav" class="site-nav" data-site-nav aria-label="Sections">
+      <div class="nav-links">
+        <a href="#intro">Intro</a>
+        <a href="#framework">Framework</a>
+        <a href="#projects">Projects</a>
+        <a href="#products">Products</a>
+        <a href="#resources">Resources</a>
       </div>
+      <div class="nav-tools">
+        <div class="sns-row">
+          <a class="sns" href="https://github.com/chainnes" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <a class="sns" href="https://www.linkedin.com/company/chainnes/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+        </div>
+        <a class="btn-primary" href="mailto:admin@chainnes.com">Contact Now</a>
+      </div>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M4.8 4.8l1.6 1.6M17.6 17.6l1.6 1.6M19.2 4.8l-1.6 1.6M6.4 17.6l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3.2A8.2 8.2 0 1 0 20.8 14 6.6 6.6 0 0 1 16 3.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>        </svg>
+    </button>
+  </header>
 
-      <div class="countdown-wrapper">
-        <div class="countdown-title">Countdown to The Great Germination (10.10.26)</div>
-        <div class="countdown-grid">
-          <div class="countdown-box">
-            <div id="days" class="countdown-value">00</div>
-            <div class="countdown-label">Days</div>
-          </div>
-          <div class="countdown-box">
-            <div id="hours" class="countdown-value">00</div>
-            <div class="countdown-label">Hours</div>
-          </div>
-          <div class="countdown-box">
-            <div id="minutes" class="countdown-value">00</div>
-            <div class="countdown-label">Mins</div>
-          </div>
-          <div class="countdown-box">
-            <div id="seconds" class="countdown-value">00</div>
-            <div class="countdown-label">Secs</div>
-          </div>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V10"/><path d="M12 14c0-4-3.2-6.2-7-6.5 1.6 3.8 4 5.8 7 6.5z"/><path d="M12 12c0-3.4 3-6 7.2-6.2C17.4 9.2 15 11.2 12 12z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C6 11 12 5 20 4c-1 9-7 15-15 15z"/><path d="M9 16c2-1.4 4-3.4 6.5-6.5"/></symbol>
+    <symbol id="i-wreath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18c-2.4-1.6-4-4.4-3.4-8"/><path d="M16 18c2.4-1.6 4-4.4 3.4-8"/><path d="M8.2 10.2c1.2 2 2.4 3.2 3.8 4"/><path d="M15.8 10.2c-1.2 2-2.4 3.2-3.8 4"/><path d="M12 14.2V19"/><circle cx="12" cy="8.2" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4c2.4 2.6 2.4 13.4 0 16"/><path d="M12 4c-2.4 2.6-2.4 13.4 0 16"/><path d="M4.6 12h14.8"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c1.8-3 2.8-3 4.6 0s2.8 3 4.6 0 2.8-3 4.6 0 2.6 3 4.2 0"/></symbol>
+    <symbol id="i-cycle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.5a5 5 0 0 1 8-1.8"/><path d="M16.2 3.8v4.2h-4.2"/><path d="M16.5 15.5a5 5 0 0 1-8 1.8"/><path d="M7.8 20.2v-4.2h4.2"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 11.5 12 17l5-5.5"/><path d="M6 20h12"/></symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20v-6"/><path d="M5.2 14.2C5.2 10.4 8 8 8 8s2.8 2.4 2.8 6.2"/><path d="M16.2 20V12"/><path d="M13 12.2C13 8 16.2 5.2 16.2 5.2S19.4 8 19.4 12.2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 6.2V12c0 4.2-2.8 6.8-7 8.5-4.2-1.7-7-4.3-7-8.5V6.2z"/></symbol>
+    <symbol id="i-balance" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="M7 19.5h10"/><path d="M5 8h14"/><path d="M5 8 3.2 13"/><path d="M5 8 6.8 13"/><path d="M19 8l-1.8 5"/><path d="M19 8l1.8 5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3.4v2.2M12 18.4v2.2M3.4 12h2.2M18.4 12h2.2M6.1 6.1l1.6 1.6M16.3 16.3l1.6 1.6M17.9 6.1l-1.6 1.6M7.7 16.3l-1.6 1.6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3.5" width="8" height="17" rx="2"/><path d="M11 18.2h2"/></symbol>
+    <symbol id="i-modules" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.2 6.2a3.2 3.2 0 0 0-4.2 4.4L4.5 16.1 7.9 19.5l5.5-5.5a3.2 3.2 0 0 0 4.4-4.2l-2.2 2.2-2.2-2.2z"/></symbol>
+    <symbol id="i-ridge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 8.5 8.5 13 14l3.2-4L21 18"/><path d="M3 18h18"/></symbol>
+    <symbol id="i-bloom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7.2"/><path d="M9.2 15.2C9.2 11 12.4 8.6 16 8.4 15 12.2 12.6 14.6 9.2 15.2z"/></symbol>
+    <symbol id="i-page" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5h8.2L19 8.2V19.5H7z"/><path d="M15 4.6V8.4H18.8"/><path d="M9.5 12h5M9.5 15h5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6.2C7.6 5 10 6 12 7.6 14 6 16.4 5 19 6.2V18c-2.6-1.2-5 .1-7 1.6-2-1.5-4.4-2.8-7-1.6z"/><path d="M12 7.6V19.6"/></symbol>
+  </svg>
+
+  <main>
+    <section id="intro" class="snap-section intro">
+      <canvas id="node-field" class="node-field" aria-hidden="true"></canvas>
+      <div class="section-inner">
+        <p class="kicker">One-person studio · Philippines</p>
+        <h1>
+          <span>Build with <em class="word-intel">intelligence</em>.</span>
+          <span>Automate with <em class="word-purpose">purpose</em>.</span>
+        </h1>
+        <p class="lede">Regenerative technology for people protecting the living world. Clean, repairable, and harmless.</p>
+        <p class="kicker focus-label">Focus</p>
+        <ul class="solutions">
+          <li>Business intelligence</li>
+          <li>Full-stack development</li>
+          <li>AI &amp; automation</li>
+          <li>IoT &amp; robotics</li>
+          <li>AR &amp; VR</li>
+        </ul>
+        <!-- <p class="studio-link"><a href="/about/">About the studio</a></p> -->
+      </div>
+      <a class="scroll-cue" href="#framework">
+        <span>Scroll</span>
+        <span class="cue-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <section id="framework" class="snap-section">
+      <div class="section-inner">
+        <p class="kicker">Framework</p>
+        <h2>How a system gets made.</h2>
+        <p class="section-copy">One person, from the first conversation through the day it is running.</p>
+        <div class="practice-wrap">
+          <svg class="practice-vine" viewBox="0 0 1000 48" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M24 30C120 6 180 44 280 24s180-20 250 4 170 22 250-2 150-16 180 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <ol class="practice">
+            <li>
+              <span class="practice-mark">01</span>
+              <h3>Explore</h3>
+              <p>Listen, then name the problem in plain words.</p>
+            </li>
+            <li>
+              <span class="practice-mark">02</span>
+              <h3>Design</h3>
+              <p>Keep it repairable, private, and light to run.</p>
+            </li>
+            <li>
+              <span class="practice-mark">03</span>
+              <h3>Build</h3>
+              <p>Ship it on infrastructure a person can hold.</p>
+            </li>
+            <li>
+              <span class="practice-mark">04</span>
+              <h3>Tend</h3>
+              <p>Measure what got lighter, then choose the next loop.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="garden">
+          <p class="kicker">Tools</p>
+          <p class="section-copy">A small set for platforms, agents, dashboards, and machines. Close to the person using them.</p>
+          <svg class="garden-vine" viewBox="0 0 1200 32" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 18C90 4 150 28 240 16s150-14 230 2 180 16 270-2 160-8 230 4 150 10 230-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <ul class="garden-bed">
+            <li title="Where the software, the agent, and the workflow are written.">Cursor</li>
+            <li title="Screens, APIs, dashboards, and edge workers.">TypeScript</li>
+            <li title="Agents, models, and logic beside a machine.">Python</li>
+            <li title="Pages, Workers, R2, and a tunnel back to a local box.">Cloudflare</li>
+            <li title="The same container on a laptop, a small server, or a robot.">Docker</li>
+            <li title="Postgres, sign-in, and live updates.">Supabase</li>
+            <li title="Automations a person can open, pause, and correct.">n8n</li>
+            <li title="Models that run on the machine.">Ollama</li>
+            <li title="The local wire for sensors, trackers, and robots.">MQTT</li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <div class="progress-container">
-        <div class="progress-bar"></div>
+    <section id="resources" class="snap-section">
+      <div class="section-inner">
+        <div class="heading-row">
+          <div>
+            <p class="kicker">The field</p>
+            <h2>Where I aim the work.</h2>
+            <p class="section-copy">Regenerative technology, repair, and public-good organizations. Reference points only — Chainnes is not affiliated with them, and they are not clients.</p>
+          </div>
+          <!-- <button class="marquee-toggle" type="button" data-marquee-toggle aria-pressed="false">Pause</button> -->
+        </div>
+        <div class="marquee" data-marquee>
+          <ul class="ally-row">
+            <li><a class="ally" href="https://www.ecosia.org" target="_blank" rel="noopener noreferrer" title="Search that funds trees"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sprout"/></svg><span>Ecosia</span></a></li>
+            <li><a class="ally" href="https://www.greenpeace.org" target="_blank" rel="noopener noreferrer" title="Campaigns for the living world"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-leaf"/></svg><span>Greenpeace</span></a></li>
+            <li><a class="ally" href="https://www.un.org" target="_blank" rel="noopener noreferrer" title="International cooperation"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-wreath"/></svg><span>United Nations</span></a></li>
+            <li><a class="ally" href="https://www.unep.org" target="_blank" rel="noopener noreferrer" title="UN Environment Programme"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-globe"/></svg><span>UNEP</span></a></li>
+            <li><a class="ally" href="https://www.worldwildlife.org" target="_blank" rel="noopener noreferrer" title="Wildlife and wild places"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-wave"/></svg><span>WWF</span></a></li>
+            <li><a class="ally" href="https://www.ellenmacarthurfoundation.org" target="_blank" rel="noopener noreferrer" title="Circular economy"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-cycle"/></svg><span>Ellen MacArthur Foundation</span></a></li>
+            <li><a class="ally" href="https://drawdown.org" target="_blank" rel="noopener noreferrer" title="A catalog of climate solutions"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-down"/></svg><span>Project Drawdown</span></a></li>
+            <li><a class="ally" href="https://www.nature.org" target="_blank" rel="noopener noreferrer" title="Lands and waters"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-trees"/></svg><span>The Nature Conservancy</span></a></li>
+            <li><a class="ally" href="https://www.iucn.org" target="_blank" rel="noopener noreferrer" title="Species and protected places"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-shield"/></svg><span>IUCN</span></a></li>
+            <li><a class="ally" href="https://www.rainforest-alliance.org" target="_blank" rel="noopener noreferrer" title="Forests and farms"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-leaf"/></svg><span>Rainforest Alliance</span></a></li>
+            <li><a class="ally" href="https://www.clientearth.org" target="_blank" rel="noopener noreferrer" title="Environmental law"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-balance"/></svg><span>ClientEarth</span></a></li>
+            <li><a class="ally" href="https://solar-aid.org" target="_blank" rel="noopener noreferrer" title="Solar light beyond the grid"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sun"/></svg><span>SolarAid</span></a></li>
+            <li><a class="ally" href="https://onetreeplanted.org" target="_blank" rel="noopener noreferrer" title="Reforestation"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sprout"/></svg><span>One Tree Planted</span></a></li>
+            <li><a class="ally" href="https://www.fairphone.com" target="_blank" rel="noopener noreferrer" title="Repairable phones"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-phone"/></svg><span>Fairphone</span></a></li>
+            <li><a class="ally" href="https://frame.work" target="_blank" rel="noopener noreferrer" title="Modular, repairable computers"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-modules"/></svg><span>Framework</span></a></li>
+            <li><a class="ally" href="https://www.ifixit.com" target="_blank" rel="noopener noreferrer" title="The right to repair"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-tool"/></svg><span>iFixit</span></a></li>
+            <li><a class="ally" href="https://www.patagonia.com" target="_blank" rel="noopener noreferrer" title="A company in service of the earth"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-ridge"/></svg><span>Patagonia</span></a></li>
+            <li><a class="ally" href="https://www.opensourceecology.org" target="_blank" rel="noopener noreferrer" title="Open tools for living"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-bloom"/></svg><span>Open Source Ecology</span></a></li>
+            <li><a class="ally" href="https://solar.lowtechmagazine.com" target="_blank" rel="noopener noreferrer" title="A solar-powered publication"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-page"/></svg><span>Low-tech Magazine</span></a></li>
+            <li><a class="ally" href="https://ashden.org" target="_blank" rel="noopener noreferrer" title="Climate solutions that already work"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sun"/></svg><span>Ashden</span></a></li>
+            <li><a class="ally" href="https://www.bcorporation.net" target="_blank" rel="noopener noreferrer" title="Business as a force for good"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-bloom"/></svg><span>B Lab</span></a></li>
+            <li><a class="ally" href="https://www.appropedia.org" target="_blank" rel="noopener noreferrer" title="Appropriate technology, shared openly"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-book"/></svg><span>Appropedia</span></a></li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="action-area">
-        <p class="contact-subtext">
-          Ready to automate your workflows? Let's talk systems.
-        </p>
-        <a href="mailto:admin@chainnes.com" class="contact-btn">Contact</a>
+    <section id="projects" class="snap-section">
+      <div class="section-inner band" data-carousel-root>
+        <div class="heading-row">
+          <div>
+            <p class="kicker">Projects</p>
+            <h2>Concepts in the garden.</h2>
+            <p class="section-copy">These are the first systems the studio is drawing, one for each practice.</p>
+          </div>
+          <div class="carousel-controls">
+            <button type="button" data-carousel-prev aria-label="Show previous projects">←</button>
+            <button type="button" data-carousel-next aria-label="Show next projects">→</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Project concepts">
+          <article class="concept">
+            <p class="type">Concept · Business intelligence</p>
+            <h3><a class="card-title" href="/projects/#canopy-ledger">Canopy Ledger</a></h3>
+            <p>A living dashboard for a regenerative farm or community forest: yield, water, waste, and what to tend next.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Concept · Full-stack development</p>
+            <h3><a class="card-title" href="/projects/#tide-stack">Tide Stack</a></h3>
+            <p>A small public site and member space for a coastal or neighborhood restoration group in the Philippines.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Concept · AI &amp; automation</p>
+            <h3><a class="card-title" href="/projects/#root-agent">Root Agent</a></h3>
+            <p>An assistant that sorts repair requests, grant dates, and field notes, and waits for a person before it acts.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Concept · IoT</p>
+            <h3><a class="card-title" href="/projects/#plot-node">Plot Node</a></h3>
+            <p>Soil, rain, and solar sensors that stay on the local network and share only what the garden needs.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Concept · Robotics</p>
+            <h3><a class="card-title" href="/projects/#seed-walker">Seed Walker</a></h3>
+            <p>A small nursery machine for trays and paths, drawn to be repaired rather than replaced.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Concept · AR &amp; VR</p>
+            <h3><a class="card-title" href="/projects/#grove-layer">Grove Layer</a></h3>
+            <p>An overlay for a walk or a classroom that names plants, materials, and how to repair them.</p>
+          </article>
+        </div>
+        <a class="btn" href="/projects/">All concepts</a>
       </div>
+    </section>
 
-      <div class="social-links">
-        <a href="https://x.com/chainnes" target="_blank" rel="noopener noreferrer" class="social-icon" title="X (Twitter)">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="https://github.com/chainnes" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        </a>
-        <a href="https://linkedin.com/company/chainne-labs" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        </a>
+    <section id="products" class="snap-section">
+      <div class="section-inner band" data-carousel-root>
+        <div class="heading-row">
+          <div>
+            <p class="kicker">Digital products</p>
+            <h2>Sketches to host yourself.</h2>
+            <p class="section-copy">Starters the studio can grow into real templates, once a version exists.</p>
+          </div>
+          <div class="carousel-controls">
+            <button type="button" data-carousel-prev aria-label="Show previous products">←</button>
+            <button type="button" data-carousel-next aria-label="Show next products">→</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Digital product concepts">
+          <article class="concept">
+            <p class="type">Sketch · Business intelligence</p>
+            <h3><a class="card-title" href="/products/#living-dashboard">Living Dashboard</a></h3>
+            <p>A board for energy, water, and materials. Meant to be hosted by the organization that uses it.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Sketch · Full-stack development</p>
+            <h3><a class="card-title" href="/products/#regenerative-site-kit">Regenerative Site Kit</a></h3>
+            <p>A starter for a green organization’s site: pages, a simple member space, and room to grow.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Sketch · AI &amp; automation</p>
+            <h3><a class="card-title" href="/products/#purpose-agent">Purpose Agent</a></h3>
+            <p>An automation with a human checkpoint, so a workflow can be paused and corrected.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Sketch · IoT</p>
+            <h3><a class="card-title" href="/products/#sensor-plot">Sensor Plot</a></h3>
+            <p>A starter for soil, rain, and solar readings on a garden or a small microgrid.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Sketch · AR &amp; VR</p>
+            <h3><a class="card-title" href="/products/#field-overlay">Field Overlay</a></h3>
+            <p>Notes that sit over a site visit: species, materials, and the next repair.</p>
+          </article>
+          <article class="concept">
+            <p class="type">Sketch · Robotics</p>
+            <h3><a class="card-title" href="/products/#quiet-machine">Quiet Machine</a></h3>
+            <p>Interface notes for a repairable field robot: status a person can read at a glance.</p>
+          </article>
+        </div>
+        <a class="btn" href="/products/">All sketches</a>
       </div>
+      <footer class="site-footer">
+        <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · © 2026 Chainnes</p>
+      </footer>
+    </section>
+  </main>
 
-      <div class="footer-note">
-        &copy; 2026 Chainnes. Planting the first lines of code.
-      </div>
-    </div>
-
-    <script>
-      // Set the launch date to October 10, 2026, 00:00:00
-      const launchDate = new Date("October 10, 2026 00:00:00").getTime();
-
-      function updateCountdown() {
-        const now = new Date().getTime();
-        const timeLeft = launchDate - now;
-
-        if (timeLeft < 0) {
-          document.querySelector(".countdown-title").innerText = "The Great Germination Has Begun!";
-          document.querySelector(".countdown-grid").style.display = "none";
-          return;
-        }
-
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = String(days).padStart(2, "0");
-        document.getElementById("hours").innerText = String(hours).padStart(2, "0");
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
-      }
-
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-    </script>
-  </body>
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/landing.js" defer></script>
+</body>
 </html>

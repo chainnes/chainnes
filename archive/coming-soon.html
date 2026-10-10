@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chainnes | Something is Growing</title>
+    <style>
+      :root {
+        --cyber-dark: #080c0a;
+        --neon-green: #39ff14;
+        --earth-wood: #8b5a2b;
+        --solarpunk-leaf: #2ecc71;
+        --cottage-cream: #fefae0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--cyber-dark);
+        color: var(--cottage-cream);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background-image:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(46, 204, 113, 0.05) 0%,
+            transparent 70%
+          ),
+          linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          30px 30px;
+      }
+
+      .maintenance-card {
+        background: rgba(139, 90, 43, 0.12);
+        border: 1px solid var(--earth-wood);
+        border-radius: 24px;
+        padding: 45px 35px;
+        max-width: 650px;
+        width: 100%;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 40px rgba(46, 204, 113, 0.1);
+      }
+
+      .status-badge {
+        display: inline-block;
+        background: rgba(46, 204, 113, 0.1);
+        color: var(--solarpunk-leaf);
+        border: 1px solid var(--solarpunk-leaf);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+      }
+
+      h1 {
+        color: var(--neon-green);
+        font-size: 2.1rem;
+        margin-bottom: 12px;
+        text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+        line-height: 1.2;
+      }
+
+      .tagline {
+        font-size: 0.95rem;
+        color: var(--solarpunk-leaf);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+      }
+
+      .offerings {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .offering-pill {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--earth-wood);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #dcd7c9;
+      }
+
+      /* Countdown Timer Styles */
+      .countdown-wrapper {
+        margin-bottom: 30px;
+      }
+
+      .countdown-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--solarpunk-leaf);
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
+
+      .countdown-grid {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .countdown-box {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--earth-wood);
+        border-radius: 10px;
+        padding: 10px 14px;
+        min-width: 70px;
+      }
+
+      .countdown-value {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--neon-green);
+        font-family: monospace;
+      }
+
+      .countdown-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        color: #a8a29e;
+        margin-top: 4px;
+        letter-spacing: 1px;
+      }
+
+      .progress-container {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 25px;
+      }
+
+      .progress-bar {
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--earth-wood),
+          var(--solarpunk-leaf),
+          var(--neon-green)
+        );
+        animation: breathe 3s infinite ease-in-out;
+      }
+
+      @keyframes breathe {
+        0% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+          box-shadow: 0 0 12px var(--neon-green);
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+
+      .action-area {
+        margin-bottom: 25px;
+      }
+
+      .contact-subtext {
+        font-size: 0.9rem;
+        color: #dcd7c9;
+        margin-bottom: 15px;
+      }
+
+      .contact-btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background-color: var(--solarpunk-leaf);
+        color: var(--cyber-dark);
+        font-family: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+      }
+
+      .contact-btn:hover {
+        background-color: var(--neon-green);
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+        transform: translateY(-1px);
+      }
+
+      /* Social Links Styles */
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--earth-wood);
+        border-radius: 50%;
+        color: var(--cottage-cream);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .social-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+
+      .social-icon:hover {
+        border-color: var(--solarpunk-leaf);
+        color: var(--neon-green);
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .footer-note {
+        font-size: 0.85rem;
+        color: var(--earth-wood);
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="maintenance-card">
+      <div class="status-badge">Root System Initializing</div>
+      <h1>Something Rooted is Coming.</h1>
+      <div class="tagline">Build with intelligence, automate with purpose.</div>
+
+      <div class="offerings">
+        <span class="offering-pill">⚡ Agentic AI Systems</span>
+        <span class="offering-pill">🔄 Automation Workflows</span>
+        <span class="offering-pill">🌱 Solarpunk Tech</span>
+      </div>
+
+      <div class="countdown-wrapper">
+        <div class="countdown-title">Countdown to The Great Germination (10.10.26)</div>
+        <div class="countdown-grid">
+          <div class="countdown-box">
+            <div id="days" class="countdown-value">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-box">
+            <div id="hours" class="countdown-value">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-box">
+            <div id="minutes" class="countdown-value">00</div>
+            <div class="countdown-label">Mins</div>
+          </div>
+          <div class="countdown-box">
+            <div id="seconds" class="countdown-value">00</div>
+            <div class="countdown-label">Secs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+
+      <div class="action-area">
+        <p class="contact-subtext">
+          Ready to automate your workflows? Let's talk systems.
+        </p>
+        <a href="mailto:admin@chainnes.com" class="contact-btn">Contact</a>
+      </div>
+
+      <div class="social-links">
+        <a href="https://x.com/chainnes" target="_blank" rel="noopener noreferrer" class="social-icon" title="X (Twitter)">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://github.com/chainnes" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/chainne-labs" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </div>
+
+      <div class="footer-note">
+        &copy; 2026 Chainnes. Planting the first lines of code.
+      </div>
+    </div>
+
+    <script>
+      // Set the launch date to October 10, 2026, 00:00:00
+      const launchDate = new Date("October 10, 2026 00:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = launchDate - now;
+
+        if (timeLeft < 0) {
+          document.querySelector(".countdown-title").innerText = "The Great Germination Has Begun!";
+          document.querySelector(".countdown-grid").style.display = "none";
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, "0");
+        document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
