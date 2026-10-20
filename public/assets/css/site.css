@@ -412,7 +412,7 @@ h3 {
   margin-top: 0.85rem;
 }
 
-.intro-purpose {
+.intro.snap-section .intro-purpose {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem 2rem;
@@ -420,7 +420,7 @@ h3 {
   max-width: 44rem;
 }
 
-.intro .intro-purpose h2 {
+.intro.snap-section .intro-purpose h2 {
   margin: 0 0 0.25rem;
   font-family: var(--sans);
   font-size: 0.78rem;
@@ -673,15 +673,16 @@ h3 {
   margin: 0.15rem 0 0.35rem;
 }
 
-.garden-layers {
+.garden .garden-layers {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem 1.75rem;
   margin: 0.1rem 0 0;
 }
 
-.garden-role {
+.garden .garden-role {
   margin: 0 0 0.42rem;
+  font-family: var(--sans);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -729,7 +730,7 @@ h3 {
   color: var(--forest);
 }
 
-.journal-list {
+.snap-section .journal-list {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -738,19 +739,28 @@ h3 {
   padding: 0;
 }
 
-.journal-list a {
+.snap-section .journal-list li {
+  list-style: none;
+}
+
+.snap-section .journal-list a {
   display: block;
   padding: 0.85rem 0 0.95rem;
   border-top: 1px solid var(--line);
+  color: inherit;
   text-decoration: none;
 }
 
-.journal-list h3 {
+.snap-section .journal-list h3 {
   margin: 0.1rem 0 0;
+  font-family: var(--serif);
   font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
-.journal-list a:hover h3 {
+.snap-section .journal-list a:hover h3 {
   color: var(--accent);
 }
 
@@ -1072,13 +1082,21 @@ h3 {
 }
 
 #about.snap-section {
+  height: 100vh;
+  min-height: 100vh;
   justify-content: flex-start;
   padding-bottom: 0.35rem;
 }
 
 #about > .section-inner {
-  flex: 1;
-  align-content: center;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#about > .site-footer {
+  margin-top: auto;
 }
 
 body.subpage {
@@ -1389,6 +1407,11 @@ body.subpage .page-wrap {
   }
 
   .snap-section {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  #about.snap-section {
     height: auto;
     min-height: 100vh;
   }
