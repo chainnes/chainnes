@@ -4,32 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chainnes | Build with intelligence</title>
-  <meta name="description" content="Chainnes is Charlene Anne Cordero’s one-person solarpunk studio in the Philippines. Build with intelligence. Automate with purpose.">
+  <meta name="description" content="Chainnes is a solarpunk studio in the Philippines. Solarpunk is a future of sunlight, repairable tools, and shared living places. The mission is to spread that future and build technology for it.">
   <link rel="canonical" href="https://chainnes.com/">
   <meta property="og:title" content="Chainnes — Build with intelligence. Automate with purpose.">
-  <meta property="og:description" content="A one-person solarpunk studio in the Philippines for regenerative technology: business intelligence, full-stack development, AI and automation, IoT and robotics, AR and VR.">
+  <meta property="og:description" content="A solarpunk studio in the Philippines. Technology that runs on sunlight, can be repaired, and helps living places.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chainnes.com/">
   <meta property="og:image" content="https://chainnes.com/assets/images/chainnes-logo-day.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Chainnes — Build with intelligence. Automate with purpose.">
-  <meta name="twitter:description" content="A one-person solarpunk studio in the Philippines for regenerative, harmless technology.">
+  <meta name="twitter:description" content="A solarpunk studio in the Philippines, building technology for a future of sunlight, repair, and living places.">
   <link rel="icon" type="image/png" href="/assets/images/chainnes-logo-day.png">
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem("chainnes-theme");
-        var theme = stored === "day" || stored === "night"
-          ? stored
-          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
-        document.documentElement.setAttribute("data-theme", theme);
-        var icon = document.querySelector('link[rel="icon"]');
-        if (icon) icon.href = theme === "night" ? "/assets/images/chainnes-logo.png" : "/assets/images/chainnes-logo-day.png";
-      } catch (error) {
-        document.documentElement.setAttribute("data-theme", "day");
-      }
-    })();
-  </script>
+  <script src="/assets/js/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,680;1,9..144,520;1,9..144,680&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,10 +32,11 @@
     <nav id="site-nav" class="site-nav" data-site-nav aria-label="Sections">
       <div class="nav-links">
         <a href="#intro">Intro</a>
-        <a href="#framework">Framework</a>
-        <a href="#resources">Resources</a>
+        <a href="#framework">Frameworks</a>
         <a href="#projects">Projects</a>
-        <a href="#products">Products</a>
+        <a href="#journal">Journal</a>
+        <a href="#products">Shop</a>
+        <a href="#about">About</a>
       </div>
       <div class="nav-tools">
         <div class="sns-row">
@@ -90,12 +77,22 @@
     <section id="intro" class="snap-section intro">
       <canvas id="node-field" class="node-field" aria-hidden="true"></canvas>
       <div class="section-inner">
-        <p class="kicker">One-person studio · Philippines</p>
+        <p class="kicker">Solarpunk studio · Philippines</p>
         <h1>
           <span>Build with <em class="word-intel">intelligence</em>.</span>
           <span>Automate with <em class="word-purpose">purpose</em>.</span>
         </h1>
-        <p class="lede">Regenerative technology for people protecting the living world. Clean, repairable, and harmless.</p>
+        <p class="lede">Regenerative systems engineering for organizations protecting the living world. High-performance, edge-deployed, and built to last.</p>
+        <div class="intro-purpose">
+          <section>
+            <h2>Mission</h2>
+            <p>Spread solarpunk, and build technology for that future: tools that run on sunlight, can be fixed, and help living places.</p>
+          </section>
+          <section>
+            <h2>Vision</h2>
+            <p>A world people can picture and keep, where useful machines sit beside gardens, solar roofs, and the hands that repair them.</p>
+          </section>
+        </div>
         <p class="kicker focus-label">Focus</p>
         <ul class="solutions">
           <li>Full-stack development</li>
@@ -114,7 +111,7 @@
 
     <section id="framework" class="snap-section">
       <div class="section-inner">
-        <p class="kicker">Framework</p>
+        <p class="kicker">Frameworks</p>
         <h2>How a system gets made.</h2>
         <p class="section-copy">One person, from the first conversation through the day it is running.</p>
         <div class="practice-wrap">
@@ -130,7 +127,7 @@
             <li>
               <span class="practice-mark">02</span>
               <h3>Design</h3>
-              <p>Keep it repairable, private, and light to run.</p>
+              <p>Keep it repairable, private, compute-efficient, and light to run.</p>
             </li>
             <li>
               <span class="practice-mark">03</span>
@@ -145,61 +142,42 @@
           </ol>
         </div>
         <div class="garden">
-          <p class="kicker">Tools</p>
+          <p class="kicker">Tech stack</p>
           <p class="section-copy">A small set for platforms, agents, dashboards, and machines. Close to the person using them.</p>
           <svg class="garden-vine" viewBox="0 0 1200 32" preserveAspectRatio="none" aria-hidden="true">
             <path d="M0 18C90 4 150 28 240 16s150-14 230 2 180 16 270-2 160-8 230 4 150 10 230-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
           </svg>
-          <ul class="garden-bed">
-            <li title="Where the software, the agent, and the workflow are written.">Cursor</li>
-            <li title="Screens, APIs, dashboards, and edge workers.">TypeScript</li>
-            <li title="Agents, models, and logic beside a machine.">Python</li>
-            <li title="Pages, Workers, R2, and a tunnel back to a local box.">Cloudflare</li>
-            <li title="The same container on a laptop, a small server, or a robot.">Docker</li>
-            <li title="Postgres, sign-in, and live updates.">Supabase</li>
-            <li title="Automations a person can open, pause, and correct.">n8n</li>
-            <li title="Models that run on the machine.">Ollama</li>
-            <li title="The local wire for sensors, trackers, and robots.">MQTT</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="resources" class="snap-section">
-      <div class="section-inner">
-        <div class="heading-row">
-          <div>
-            <p class="kicker">The field</p>
-            <h2>Where I aim the work.</h2>
-            <p class="section-copy">Regenerative technology, repair, and public-good organizations. Reference points only — Chainnes is not affiliated with them, and they are not clients.</p>
+          <div class="garden-layers">
+            <div class="garden-layer">
+              <p class="garden-role">Edge Runtime &amp; Compute</p>
+              <ul class="garden-bed">
+                <li title="Pages, Workers, R2, and a tunnel back to a local box.">Cloudflare</li>
+                <li title="The same container on a laptop, a small server, or a robot.">Docker</li>
+              </ul>
+            </div>
+            <div class="garden-layer">
+              <p class="garden-role">Data Systems &amp; State</p>
+              <ul class="garden-bed">
+                <li title="Postgres, sign-in, and live updates.">Supabase</li>
+                <li title="Screens, APIs, dashboards, and edge workers.">TypeScript</li>
+                <li title="Agents, models, and logic beside a machine.">Python</li>
+              </ul>
+            </div>
+            <div class="garden-layer">
+              <p class="garden-role">Automation &amp; Local AI</p>
+              <ul class="garden-bed">
+                <li title="Automations a person can open, pause, and correct.">n8n</li>
+                <li title="Models that run on the machine.">Ollama</li>
+              </ul>
+            </div>
+            <div class="garden-layer">
+              <p class="garden-role">Physical &amp; Machine Layer</p>
+              <ul class="garden-bed">
+                <li title="The local wire for sensors, trackers, and robots.">MQTT</li>
+                <li title="Where the software, the agent, and the workflow are written.">Cursor</li>
+              </ul>
+            </div>
           </div>
-          <!-- <button class="marquee-toggle" type="button" data-marquee-toggle aria-pressed="false">Pause</button> -->
-        </div>
-        <div class="marquee" data-marquee>
-          <ul class="ally-row">
-            <li><a class="ally" href="https://www.ecosia.org" target="_blank" rel="noopener noreferrer" title="Search that funds trees"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sprout"/></svg><span>Ecosia</span></a></li>
-            <li><a class="ally" href="https://www.greenpeace.org" target="_blank" rel="noopener noreferrer" title="Campaigns for the living world"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-leaf"/></svg><span>Greenpeace</span></a></li>
-            <li><a class="ally" href="https://www.un.org" target="_blank" rel="noopener noreferrer" title="International cooperation"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-wreath"/></svg><span>United Nations</span></a></li>
-            <li><a class="ally" href="https://www.unep.org" target="_blank" rel="noopener noreferrer" title="UN Environment Programme"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-globe"/></svg><span>UNEP</span></a></li>
-            <li><a class="ally" href="https://www.worldwildlife.org" target="_blank" rel="noopener noreferrer" title="Wildlife and wild places"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-wave"/></svg><span>WWF</span></a></li>
-            <li><a class="ally" href="https://www.ellenmacarthurfoundation.org" target="_blank" rel="noopener noreferrer" title="Circular economy"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-cycle"/></svg><span>Ellen MacArthur Foundation</span></a></li>
-            <li><a class="ally" href="https://drawdown.org" target="_blank" rel="noopener noreferrer" title="A catalog of climate solutions"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-down"/></svg><span>Project Drawdown</span></a></li>
-            <li><a class="ally" href="https://www.nature.org" target="_blank" rel="noopener noreferrer" title="Lands and waters"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-trees"/></svg><span>The Nature Conservancy</span></a></li>
-            <li><a class="ally" href="https://www.iucn.org" target="_blank" rel="noopener noreferrer" title="Species and protected places"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-shield"/></svg><span>IUCN</span></a></li>
-            <li><a class="ally" href="https://www.rainforest-alliance.org" target="_blank" rel="noopener noreferrer" title="Forests and farms"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-leaf"/></svg><span>Rainforest Alliance</span></a></li>
-            <li><a class="ally" href="https://www.clientearth.org" target="_blank" rel="noopener noreferrer" title="Environmental law"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-balance"/></svg><span>ClientEarth</span></a></li>
-            <li><a class="ally" href="https://solar-aid.org" target="_blank" rel="noopener noreferrer" title="Solar light beyond the grid"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sun"/></svg><span>SolarAid</span></a></li>
-            <li><a class="ally" href="https://onetreeplanted.org" target="_blank" rel="noopener noreferrer" title="Reforestation"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sprout"/></svg><span>One Tree Planted</span></a></li>
-            <li><a class="ally" href="https://www.fairphone.com" target="_blank" rel="noopener noreferrer" title="Repairable phones"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-phone"/></svg><span>Fairphone</span></a></li>
-            <li><a class="ally" href="https://frame.work" target="_blank" rel="noopener noreferrer" title="Modular, repairable computers"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-modules"/></svg><span>Framework</span></a></li>
-            <li><a class="ally" href="https://www.ifixit.com" target="_blank" rel="noopener noreferrer" title="The right to repair"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-tool"/></svg><span>iFixit</span></a></li>
-            <li><a class="ally" href="https://www.patagonia.com" target="_blank" rel="noopener noreferrer" title="A company in service of the earth"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-ridge"/></svg><span>Patagonia</span></a></li>
-            <li><a class="ally" href="https://www.opensourceecology.org" target="_blank" rel="noopener noreferrer" title="Open tools for living"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-bloom"/></svg><span>Open Source Ecology</span></a></li>
-            <li><a class="ally" href="https://solar.lowtechmagazine.com" target="_blank" rel="noopener noreferrer" title="A solar-powered publication"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-page"/></svg><span>Low-tech Magazine</span></a></li>
-            <li><a class="ally" href="https://ashden.org" target="_blank" rel="noopener noreferrer" title="Climate solutions that already work"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-sun"/></svg><span>Ashden</span></a></li>
-            <li><a class="ally" href="https://www.bcorporation.net" target="_blank" rel="noopener noreferrer" title="Business as a force for good"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-bloom"/></svg><span>B Lab</span></a></li>
-            <li><a class="ally" href="https://www.appropedia.org" target="_blank" rel="noopener noreferrer" title="Appropriate technology, shared openly"><svg class="ally-mark" viewBox="-6 -6 36 36"><use href="#i-book"/></svg><span>Appropedia</span></a></li>
-          </ul>
         </div>
       </div>
     </section>
@@ -231,12 +209,12 @@
           <article class="concept">
             <p class="type">Concept · AI &amp; automation</p>
             <h3><a class="card-title" href="/projects/#root-agent">Root Agent</a></h3>
-            <p>An assistant that sorts repair requests, grant dates, and field notes, and waits for a person before it acts.</p>
+            <p>A local-first agentic workflow that structures data, sorts repair requests, grant dates, and field notes, and waits for a human checkpoint before it acts.</p>
           </article>
           <article class="concept">
             <p class="type">Concept · IoT</p>
             <h3><a class="card-title" href="/projects/#plot-node">Plot Node</a></h3>
-            <p>Soil, rain, and solar sensors that stay on the local network and share only what the garden needs.</p>
+            <p>Soil, rain, and solar micro-sensors running on a decentralized local network, emitting only the metrics the ecosystem requires via lightweight protocols.</p>
           </article>
           <article class="concept">
             <p class="type">Concept · Robotics</p>
@@ -253,20 +231,55 @@
       </div>
     </section>
 
+    <section id="journal" class="snap-section">
+      <div class="section-inner">
+        <p class="kicker">Journal</p>
+        <h2>Notes from the studio.</h2>
+        <p class="section-copy">Articles, concept studies, and essays. I write them. Agents help me draft and check. I decide what stays.</p>
+        <ul class="journal-list">
+          <li>
+            <a href="/resources/philippines-civic-map/">
+              <p class="type">Concept study</p>
+              <h3>A map for a living place</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/resources/ai-sustainable-tech/">
+              <p class="type">Article</p>
+              <h3>Lighter model queries</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/resources/agentic-workflows/">
+              <p class="type">Essay</p>
+              <h3>Automations a person can pause</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/resources/self-hosted-automation/">
+              <p class="type">Essay</p>
+              <h3>Sensors that stay nearby</h3>
+            </a>
+          </li>
+        </ul>
+        <a class="btn" href="/resources/">The journal</a>
+      </div>
+    </section>
+
     <section id="products" class="snap-section">
       <div class="section-inner band" data-carousel-root>
         <div class="heading-row">
           <div>
-            <p class="kicker">Digital products</p>
-            <h2>Sketches to host yourself.</h2>
-            <p class="section-copy">Starters the studio can grow into real templates, once a version exists.</p>
+            <p class="kicker">Shop</p>
+            <h2>The Chainnes shop.</h2>
+            <p class="section-copy">Digital products are one shelf. These sketches can grow into real things, once a version exists.</p>
           </div>
           <div class="carousel-controls">
             <button type="button" data-carousel-prev aria-label="Show previous products">←</button>
             <button type="button" data-carousel-next aria-label="Show next products">→</button>
           </div>
         </div>
-        <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Digital product concepts">
+        <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Shop">
           <article class="concept">
             <p class="type">Sketch · Business intelligence</p>
             <h3><a class="card-title" href="/products/#living-dashboard">Living Dashboard</a></h3>
@@ -298,7 +311,16 @@
             <p>Interface notes for a repairable field robot: status a person can read at a glance.</p>
           </article>
         </div>
-        <a class="btn" href="/products/">All sketches</a>
+        <a class="btn" href="/products/">The shop</a>
+      </div>
+    </section>
+
+    <section id="about" class="snap-section">
+      <div class="section-inner">
+        <p class="kicker">About</p>
+        <h2>One studio. Advanced tools, kept harmless.</h2>
+        <p class="section-copy">I run Chainnes, a high-tech solarpunk studio in the Philippines. I build software, models, sensors, and machines that can live beside the living world. Agents help me draft and check. I still decide.</p>
+        <a class="btn" href="/about/">Learn more</a>
       </div>
       <footer class="site-footer">
         <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · © 2026 Chainnes</p>

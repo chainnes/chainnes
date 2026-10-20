@@ -203,7 +203,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 0.85rem 1rem;
 }
 
 .nav-tools {
@@ -377,7 +377,7 @@ h3 {
 }
 
 .intro h1 {
-  font-size: clamp(2.15rem, 5.4vw, 4.35rem);
+  font-size: clamp(1.85rem, 4.2vw, 3.35rem);
   color: var(--forest);
   max-width: none;
 }
@@ -408,8 +408,38 @@ h3 {
   color: var(--accent-2);
 }
 
+.intro .lede {
+  margin-top: 0.85rem;
+}
+
+.intro-purpose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+  margin: 1.05rem 0 0;
+  max-width: 44rem;
+}
+
+.intro .intro-purpose h2 {
+  margin: 0 0 0.25rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.intro-purpose p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
 .focus-label {
-  margin-top: 1.45rem;
+  margin-top: 1.15rem;
 }
 
 .solutions {
@@ -643,6 +673,22 @@ h3 {
   margin: 0.15rem 0 0.35rem;
 }
 
+.garden-layers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.75rem;
+  margin: 0.1rem 0 0;
+}
+
+.garden-role {
+  margin: 0 0 0.42rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
 .garden-bed {
   list-style: none;
   display: flex;
@@ -681,6 +727,31 @@ h3 {
 .garden-bed li:hover {
   border-color: var(--accent);
   color: var(--forest);
+}
+
+.journal-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 2rem;
+  margin: 0.4rem 0 1.15rem;
+  padding: 0;
+}
+
+.journal-list a {
+  display: block;
+  padding: 0.85rem 0 0.95rem;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.journal-list h3 {
+  margin: 0.1rem 0 0;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.journal-list a:hover h3 {
+  color: var(--accent);
 }
 
 .marquee {
@@ -1000,12 +1071,12 @@ h3 {
   color: var(--accent);
 }
 
-#products.snap-section {
+#about.snap-section {
   justify-content: flex-start;
   padding-bottom: 0.35rem;
 }
 
-#products > .section-inner {
+#about > .section-inner {
   flex: 1;
   align-content: center;
 }
@@ -1043,6 +1114,11 @@ body.subpage .page-wrap {
 .page-wrap h1 {
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   margin-bottom: 0.6rem;
+}
+
+.page-wrap > h2 {
+  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  margin: 0.4rem 0 0.9rem;
 }
 
 .page-wrap .lede {
@@ -1260,7 +1336,10 @@ body.subpage .page-wrap {
 
 @media (max-width: 720px) {
   .practice,
-  .purpose {
+  .purpose,
+  .intro-purpose,
+  .garden-layers,
+  .journal-list {
     grid-template-columns: 1fr;
   }
 
@@ -1270,7 +1349,7 @@ body.subpage .page-wrap {
   }
 
   .intro h1 {
-    font-size: clamp(2rem, 9.2vw, 2.7rem);
+    font-size: clamp(1.85rem, 8.4vw, 2.45rem);
   }
 
   .brand img {
