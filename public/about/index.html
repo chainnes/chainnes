@@ -12,21 +12,7 @@
   <meta property="og:url" content="https://chainnes.com/about/">
   <meta property="og:image" content="https://chainnes.com/assets/images/chainnes-logo-day.png">
   <link rel="icon" type="image/png" href="/assets/images/chainnes-logo-day.png">
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem("chainnes-theme");
-        var theme = stored === "day" || stored === "night"
-          ? stored
-          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
-        document.documentElement.setAttribute("data-theme", theme);
-        var icon = document.querySelector('link[rel="icon"]');
-        if (icon) icon.href = theme === "night" ? "/assets/images/chainnes-logo.png" : "/assets/images/chainnes-logo-day.png";
-      } catch (error) {
-        document.documentElement.setAttribute("data-theme", "day");
-      }
-    })();
-  </script>
+  <script src="/assets/js/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,680;1,9..144,520;1,9..144,680&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,10 +29,11 @@
     <nav id="site-nav" class="site-nav" data-site-nav aria-label="Sections">
       <div class="nav-links">
         <a href="/#intro">Intro</a>
-        <a href="/#framework">Framework</a>
+        <a href="/#framework">Frameworks</a>
         <a href="/projects/">Projects</a>
-        <a href="/products/">Products</a>
-        <a href="/#resources">Resources</a>
+        <a href="/resources/">Journal</a>
+        <a href="/products/">Shop</a>
+        <a href="/about/" aria-current="page">About</a>
       </div>
       <div class="nav-tools">
         <div class="sns-row">
@@ -154,7 +141,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · <a href="/about/" aria-current="page">About</a> · <a href="/resources/">Notes</a> · © 2026 Chainnes</p>
+    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · © 2026 Chainnes</p>
   </footer>
   <script src="/assets/js/site.js" defer></script>
 </body>

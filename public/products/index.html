@@ -3,24 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Products | Chainnes</title>
-  <meta name="description" content="Concept sketches for digital products from Chainnes. Not for sale yet.">
+  <title>Shop | Chainnes</title>
+  <meta name="description" content="The Chainnes shop. Digital product sketches are one shelf. Not a finished catalog.">
   <link rel="icon" type="image/png" href="/assets/images/chainnes-logo-day.png">
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem("chainnes-theme");
-        var theme = stored === "day" || stored === "night"
-          ? stored
-          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
-        document.documentElement.setAttribute("data-theme", theme);
-        var icon = document.querySelector('link[rel="icon"]');
-        if (icon) icon.href = theme === "night" ? "/assets/images/chainnes-logo.png" : "/assets/images/chainnes-logo-day.png";
-      } catch (error) {
-        document.documentElement.setAttribute("data-theme", "day");
-      }
-    })();
-  </script>
+  <script src="/assets/js/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,680;1,9..144,520;1,9..144,680&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,10 +23,11 @@
     <nav id="site-nav" class="site-nav" data-site-nav aria-label="Sections">
       <div class="nav-links">
         <a href="/#intro">Intro</a>
-        <a href="/#framework">Framework</a>
+        <a href="/#framework">Frameworks</a>
         <a href="/projects/">Projects</a>
-        <a href="/products/" aria-current="page">Products</a>
-        <a href="/#resources">Resources</a>
+        <a href="/resources/">Journal</a>
+        <a href="/products/" aria-current="page">Shop</a>
+        <a href="/about/">About</a>
       </div>
       <div class="nav-tools">
         <div class="sns-row">
@@ -58,9 +45,10 @@
 
   <main id="content" class="page-wrap">
     <a class="back-link" href="/#products">← Back to home</a>
-    <p class="kicker">Product sketches</p>
-    <h1>Digital products</h1>
-    <p class="lede">These are not for sale. They are starters Chainnes can grow into templates you host yourself, once a real version exists. Inquire if you want one shaped for your work.</p>
+    <p class="kicker">Shop</p>
+    <h1>The Chainnes shop</h1>
+    <p class="lede">What I sell is not only digital products. This shelf is the digital sketches: starters I can grow into something you host yourself, once a real version exists. They are not for sale yet. Inquire if you want one shaped for your work.</p>
+    <h2>Digital products</h2>
     <ol class="product-list">
       <li class="glass product-row" id="living-dashboard">
         <p class="type">Sketch · Business intelligence</p>
@@ -114,7 +102,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · <a href="/about/">About</a> · <a href="/resources/">Notes</a> · © 2026 Chainnes</p>
+    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · © 2026 Chainnes</p>
   </footer>
   <script src="/assets/js/site.js" defer></script>
 </body>

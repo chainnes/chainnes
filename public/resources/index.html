@@ -3,24 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes | Chainnes</title>
-  <meta name="description" content="Planned notes from Chainnes on regenerative technology, repairable automation, and local sensors.">
+  <title>Journal | Chainnes</title>
+  <meta name="description" content="Articles, concept studies, and essays from Chainnes, a one-person solarpunk studio. Written by Charlene Anne Cordero.">
   <link rel="icon" type="image/png" href="/assets/images/chainnes-logo-day.png">
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem("chainnes-theme");
-        var theme = stored === "day" || stored === "night"
-          ? stored
-          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
-        document.documentElement.setAttribute("data-theme", theme);
-        var icon = document.querySelector('link[rel="icon"]');
-        if (icon) icon.href = theme === "night" ? "/assets/images/chainnes-logo.png" : "/assets/images/chainnes-logo-day.png";
-      } catch (error) {
-        document.documentElement.setAttribute("data-theme", "day");
-      }
-    })();
-  </script>
+  <script src="/assets/js/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,680;1,9..144,520;1,9..144,680&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,10 +23,11 @@
     <nav id="site-nav" class="site-nav" data-site-nav aria-label="Sections">
       <div class="nav-links">
         <a href="/#intro">Intro</a>
-        <a href="/#framework">Framework</a>
+        <a href="/#framework">Frameworks</a>
         <a href="/projects/">Projects</a>
-        <a href="/products/">Products</a>
-        <a href="/#resources">Resources</a>
+        <a href="/resources/" aria-current="page">Journal</a>
+        <a href="/products/">Shop</a>
+        <a href="/about/">About</a>
       </div>
       <div class="nav-tools">
         <div class="sns-row">
@@ -58,41 +45,41 @@
 
   <main id="content" class="page-wrap">
     <a class="back-link" href="/">← Back to home</a>
-    <p class="kicker">Notes</p>
-    <h1>Writing still to come</h1>
-    <p class="lede">A shelf for essays from the studio. Nothing here is a finished case study. These are the notes Chainnes intends to write.</p>
+    <p class="kicker">Journal</p>
+    <h1>Notes from the studio</h1>
+    <p class="lede">I write here when a system is still a drawing. These are articles, concept studies, and essays. None of them is a finished client case study.</p>
     <div class="tag-row" role="toolbar" aria-label="Filter by category">
       <button class="tag" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="tag" type="button" data-filter="case-study" aria-pressed="false">Field notes</button>
-      <button class="tag" type="button" data-filter="whitepaper" aria-pressed="false">Guides</button>
-      <button class="tag" type="button" data-filter="article" aria-pressed="false">Essays</button>
+      <button class="tag" type="button" data-filter="article" aria-pressed="false">Articles</button>
+      <button class="tag" type="button" data-filter="case-study" aria-pressed="false">Concept studies</button>
+      <button class="tag" type="button" data-filter="essay" aria-pressed="false">Essays</button>
     </div>
     <div class="insight-list">
       <article class="glass insight" id="philippines-civic-map" data-category="case-study">
-        <p class="type">Planned · Field note</p>
+        <p class="type">Concept study</p>
         <div>
-          <h2>A map for a living place</h2>
+          <h2><a class="card-title" href="/resources/philippines-civic-map/">A map for a living place</a></h2>
           <p>How a community record in the Philippines could hold ecological and civic reports: what is hurting a place, what is being repaired, and a queue a person can read.</p>
         </div>
       </article>
-      <article class="glass insight" id="ai-sustainable-tech" data-category="whitepaper">
-        <p class="type">Planned · Guide</p>
+      <article class="glass insight" id="ai-sustainable-tech" data-category="article">
+        <p class="type">Article</p>
         <div>
-          <h2>Lighter model queries</h2>
-          <p>Notes on when a model helps, when it should stay on the machine, and how to keep a record of why an automated step ran.</p>
+          <h2><a class="card-title" href="/resources/ai-sustainable-tech/">Lighter model queries</a></h2>
+          <p>When a model helps, when it should stay on the machine, and how I keep a record of why an automated step ran.</p>
         </div>
       </article>
-      <article class="glass insight" id="agentic-workflows" data-category="article">
-        <p class="type">Planned · Essay</p>
+      <article class="glass insight" id="agentic-workflows" data-category="essay">
+        <p class="type">Essay</p>
         <div>
-          <h2>Automations a person can pause</h2>
-          <p>Memory, a fallback, and a review step — the minimum a workflow needs before it is asked to carry real work.</p>
+          <h2><a class="card-title" href="/resources/agentic-workflows/">Automations a person can pause</a></h2>
+          <p>Memory, a fallback, and a review step — the minimum I want in a workflow before I ask it to carry real work.</p>
         </div>
       </article>
-      <article class="glass insight" id="self-hosted-automation" data-category="article">
-        <p class="type">Planned · Essay</p>
+      <article class="glass insight" id="self-hosted-automation" data-category="essay">
+        <p class="type">Essay</p>
         <div>
-          <h2>Sensors that stay nearby</h2>
+          <h2><a class="card-title" href="/resources/self-hosted-automation/">Sensors that stay nearby</a></h2>
           <p>Why a garden, a workshop, or a small grid can keep its readings on the local network, and what that asks of the software around them.</p>
         </div>
       </article>
@@ -100,7 +87,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · <a href="/about/">About</a> · <a href="/resources/">Notes</a> · © 2026 Chainnes</p>
+    <p>Built by <a href="https://charlenecordero.com" target="_blank" rel="noopener noreferrer">Charlene Anne Cordero</a> · © 2026 Chainnes</p>
   </footer>
   <script src="/assets/js/site.js" defer></script>
   <script src="/assets/js/catalog.js" defer></script>
