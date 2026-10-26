@@ -434,10 +434,39 @@ h3 {
   position: relative;
 }
 
+.nav-drop-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-drop-toggle[aria-expanded="true"],
+.nav-drop-toggle:hover {
+  color: var(--ink);
+}
+
+.nav-caret {
+  width: 0.72rem;
+  height: 0.72rem;
+  transition: transform 0.15s ease;
+}
+
+.nav-drop.is-open .nav-caret {
+  transform: rotate(180deg);
+}
+
 .nav-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 0.45rem);
+  top: calc(100% + 0.35rem);
   left: 0;
   min-width: 11.5rem;
   padding: 0.35rem 0;
@@ -447,8 +476,7 @@ h3 {
   z-index: 30;
 }
 
-.nav-drop:hover .nav-menu,
-.nav-drop:focus-within .nav-menu {
+.nav-drop.is-open .nav-menu {
   display: grid;
 }
 
@@ -1335,7 +1363,10 @@ body.subpage .page-wrap {
   gap: 1rem;
 }
 
-.about-prose p,
+.about-prose h2 {
+  margin: 0.6rem 0 0;
+  font-size: 1.35rem;
+}
 .purpose p,
 .principles dd,
 .path p {

@@ -76,6 +76,41 @@
     if (next !== currentTheme()) applyTheme(next);
   }, 60000);
 
+  document.querySelectorAll("[data-nav-drop]").forEach(function (button) {
+    const drop = button.closest(".nav-drop");
+    if (!drop) return;
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      const open = !drop.classList.contains("is-open");
+      document.querySelectorAll(".nav-drop.is-open").forEach(function (item) {
+        item.classList.remove("is-open");
+        const toggle = item.querySelector("[data-nav-drop]");
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+      });
+      if (open) {
+        drop.classList.add("is-open");
+        button.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.addEventListener("click", function () {
+    document.querySelectorAll(".nav-drop.is-open").forEach(function (item) {
+      item.classList.remove("is-open");
+      const toggle = item.querySelector("[data-nav-drop]");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape") return;
+    document.querySelectorAll(".nav-drop.is-open").forEach(function (item) {
+      item.classList.remove("is-open");
+      const toggle = item.querySelector("[data-nav-drop]");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
   if (navToggle && nav) {
     navToggle.addEventListener("click", function () {
       const open = nav.classList.toggle("is-open");
